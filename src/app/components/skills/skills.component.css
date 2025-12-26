@@ -1,0 +1,15 @@
+/* Component-specific overrides to keep section height content-driven */
+.marquee-container {
+  padding: 0.75rem 0; /* reduce vertical padding so section isn't taller than content */
+  align-items: center;
+}
+
+.marquee-content {
+  align-items: center;
+}
+
+/* Ensure the section itself fits to its content */
+:host {
+  display: block;
+  height: auto;
+}

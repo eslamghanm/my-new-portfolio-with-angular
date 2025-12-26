@@ -1,0 +1,9 @@
+/* Styles are in global styles.css */
+
+/* About specific tweaks */
+.reveal h2 { line-height: 1; }
+
+/* Metric emphasize */
+.grid > div { transition: transform .25s ease, box-shadow .25s ease; }
+.grid > div:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+

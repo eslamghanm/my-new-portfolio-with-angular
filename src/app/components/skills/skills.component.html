@@ -1,0 +1,126 @@
+<section id="skills" class="section skills bg-[var(--bg-elevated)] py-12 md:py-20" aria-label="Skills">
+    <div class="container max-w-[1200px] w-[92%] mx-auto mb-16 reveal text-center">
+        <h2 class="text-6xl font-black mb-6 tracking-tighter text-[var(--text)]">
+            Technical <span class="text-[var(--accent)]">Arsenal</span>
+        </h2>
+        <p class="text-[var(--text-muted)] text-xl max-w-xl mx-auto">
+            The languages, frameworks, and tools I use to bring digital visions to life.
+        </p>
+    </div>
+
+    <div class="marquee-container group">
+        <div class="marquee-content flex gap-8 py-12">
+            <!-- Loop twice for infinite effect -->
+            <ng-container *ngFor="let loop of [1, 2]">
+                <div class="flex gap-8">
+                    <!-- HTML5 -->
+                    <div class="skill-row px-8 py-6 flex items-center gap-6 min-w-[280px] rounded-3xl transition-all duration-500 hover:scale-105"
+                        title="HTML5">
+                        <i class="fab fa-html5 text-orange-500 text-5xl"></i>
+                        <div>
+                            <span class="block text-xl font-black text-[var(--text)]">HTML5 & CSS3</span>
+                            <small
+                                class="text-[var(--text-muted)] font-bold uppercase tracking-widest text-[10px]">Structure
+                                & Style</small>
+                        </div>
+                    </div>
+
+                    <!-- JavaScript -->
+                    <div class="skill-row px-8 py-6 flex items-center gap-6 min-w-[280px] rounded-3xl transition-all duration-500 hover:scale-105"
+                        title="JavaScript">
+                        <i class="fab fa-js text-yellow-500 text-5xl"></i>
+                        <div>
+                            <span class="block text-xl font-black text-[var(--text)]">JavaScript</span>
+                            <small
+                                class="text-[var(--text-muted)] font-bold uppercase tracking-widest text-[10px]">Vanilla
+                                ES6+</small>
+                        </div>
+                    </div>
+
+                    <!-- TypeScript -->
+                    <div class="skill-row px-8 py-6 flex items-center gap-6 min-w-[280px] rounded-3xl transition-all duration-500 hover:scale-105"
+                        title="TypeScript">
+                        <i class="fas fa-file-code text-blue-500 text-5xl"></i>
+                        <div>
+                            <span class="block text-xl font-black text-[var(--text)]">TypeScript</span>
+                            <small
+                                class="text-[var(--text-muted)] font-bold uppercase tracking-widest text-[10px]">Typed
+                                Evolution</small>
+                        </div>
+                    </div>
+
+                    <!-- Angular -->
+                    <div class="skill-row px-8 py-6 flex items-center gap-6 min-w-[280px] rounded-3xl transition-all duration-500 hover:scale-105"
+                        title="Angular">
+                        <i class="fab fa-angular text-red-600 text-5xl"></i>
+                        <div>
+                            <span class="block text-xl font-black text-[var(--text)]">Angular</span>
+                            <small
+                                class="text-[var(--text-muted)] font-bold uppercase tracking-widest text-[10px]">Framework
+                                Pro</small>
+                        </div>
+                    </div>
+
+                    <!-- Laravel -->
+                    <div class="skill-row px-8 py-6 flex items-center gap-6 min-w-[280px] rounded-3xl transition-all duration-500 hover:scale-105"
+                        title="Laravel">
+                        <i class="fab fa-laravel text-red-500 text-5xl"></i>
+                        <div>
+                            <span class="block text-xl font-black text-[var(--text)]">Laravel</span>
+                            <small
+                                class="text-[var(--text-muted)] font-bold uppercase tracking-widest text-[10px]">Backend
+                                Master</small>
+                        </div>
+                    </div>
+
+                    <!-- PHP -->
+                    <div class="skill-row px-8 py-6 flex items-center gap-6 min-w-[280px] rounded-3xl transition-all duration-500 hover:scale-105"
+                        title="PHP">
+                        <i class="fab fa-php text-indigo-400 text-5xl"></i>
+                        <div>
+                            <span class="block text-xl font-black text-[var(--text)]">PHP 8.x</span>
+                            <small
+                                class="text-[var(--text-muted)] font-bold uppercase tracking-widest text-[10px]">Server
+                                Side</small>
+                        </div>
+                    </div>
+
+                    <!-- Tailwind -->
+                    <div class="skill-row px-8 py-6 flex items-center gap-6 min-w-[280px] rounded-3xl transition-all duration-500 hover:scale-105"
+                        title="Tailwind CSS">
+                        <i class="fas fa-wind text-teal-400 text-5xl"></i>
+                        <div>
+                            <span class="block text-xl font-black text-[var(--text)]">Tailwind CSS</span>
+                            <small
+                                class="text-[var(--text-muted)] font-bold uppercase tracking-widest text-[10px]">Utility
+                                First</small>
+                        </div>
+                    </div>
+
+                    <!-- MySQL -->
+                    <div class="skill-row px-8 py-6 flex items-center gap-6 min-w-[280px] rounded-3xl transition-all duration-500 hover:scale-105"
+                        title="MySQL">
+                        <i class="fas fa-database text-blue-400 text-5xl"></i>
+                        <div>
+                            <span class="block text-xl font-black text-[var(--text)]">MySQL</span>
+                            <small class="text-[var(--text-muted)] font-bold uppercase tracking-widest text-[10px]">Data
+                                Architect</small>
+                        </div>
+                    </div>
+
+                    <!-- Docker -->
+                    <div class="skill-row px-8 py-6 flex items-center gap-6 min-w-[280px] rounded-3xl transition-all duration-500 hover:scale-105"
+                        title="Docker">
+                        <i class="fab fa-docker text-blue-500 text-5xl"></i>
+                        <div>
+                            <span class="block text-xl font-black text-[var(--text)]">Docker</span>
+                            <small
+                                class="text-[var(--text-muted)] font-bold uppercase tracking-widest text-[10px]">DevOps
+                                Ready</small>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</section>

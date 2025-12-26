@@ -1,0 +1,69 @@
+/* Styles are in global styles.css */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Contact form specific styles */
+.form-field .error { display: none; }
+
+input[aria-invalid="true"], textarea[aria-invalid="true"] {
+    border-color: rgba(239, 68, 68, 0.9); /* rose-500 */
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.06);
+}
+
+input:focus, textarea:focus {
+    box-shadow: 0 6px 24px rgba(2,6,23,0.08);
+}
+
+/* Toast styles */
+.toast { padding: 0.75rem 1rem; border-radius: 0.5rem; margin-bottom: 0.75rem; animation: toast-in 320ms ease both; }
+.toast-success { background: linear-gradient(90deg, rgba(var(--accent-rgb),0.08), rgba(var(--accent-rgb-light),0.04)); color: var(--accent); border: 1px solid rgba(var(--accent-rgb),0.12); }
+.toast-error { background: rgba(239,68,68,0.06); color: #ef4444; border: 1px solid rgba(239,68,68,0.12); }
+
+@keyframes toast-in {
+    from { transform: translateY(8px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Success / error banners (backwards compatibility) */
+.p-4.rounded-md.bg-green-600 { background-color: rgba(16, 185, 129, 0.08); }
+.p-4.rounded-md.bg-rose-600 { background-color: rgba(239, 68, 68, 0.06); }
+
+button[disabled] { opacity: 0.6; transform: none; }
+
+/* Hover for social icons & form container */
+.reveal .absolute { transition: opacity .35s ease, transform .35s ease; }
+
+/* Slight layout tweak on small screens */
+@media (max-width: 640px) {
+    .section.contact .container { padding-left: 1rem; padding-right: 1rem; }
+    .reveal .absolute { display: none; }
+}
+
+/* Send mode tooltip/button */
+.send-mode-btn {
+  background: transparent;
+  border: none;
+  padding: 0.25rem 0.4rem;
+  border-radius: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.send-mode-btn:focus {
+  outline: none;
+  box-shadow: 0 6px 18px rgba(var(--accent-rgb), 0.12);
+}
+
+.send-mode-btn:hover i {
+  color: var(--accent);
+}
