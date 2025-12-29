@@ -2,6 +2,9 @@
   command = "npm run build:netlify"
   publish = "dist/portifolio_with_angular/browser"
 
+[context.production.environment]
+  NODE_VERSION = "18"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
