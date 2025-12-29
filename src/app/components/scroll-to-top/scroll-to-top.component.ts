@@ -6,7 +6,7 @@ import { isPlatformBrowser, CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <button *ngIf="isVisible"
+    <button [class.visible]="isVisible"
       (click)="scrollToTop()"
       class="scroll-to-top fixed bottom-6 right-6 w-14 h-14 rounded-full bg-[var(--accent)] text-[var(--bg-main)] shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 flex items-center justify-center z-50 focus:outline-none focus:ring-4 focus:ring-[rgba(var(--accent-rgb),0.18)]"
       aria-label="Scroll to top" title="Scroll to top">
@@ -71,7 +71,7 @@ export class ScrollToTopComponent implements OnInit {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       const scrollHeight = Math.max(document.documentElement.scrollHeight - document.documentElement.clientHeight, 1);
 
-      this.isVisible = scrollTop > 300;
+      this.isVisible = scrollTop > 100;
       this.scrollProgress = Math.min(1, scrollTop / scrollHeight);
 
       // Update circular progress

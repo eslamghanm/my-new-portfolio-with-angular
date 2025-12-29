@@ -1,4 +1,5 @@
-<section class="hero relative min-h-[75vh] md:min-h-screen flex items-center justify-center overflow-hidden bg-[var(--bg-main)]"
+<section id="home"
+    class="hero relative min-h-[75vh] md:min-h-screen flex items-center justify-center overflow-hidden bg-[var(--bg-main)]"
     aria-label="Hero">
     <!-- Dynamic Background Particles -->
     <div class="absolute inset-0 opacity-20 pointer-events-none">
@@ -23,12 +24,15 @@
             </h1>
 
             <h3 class="hero-subtitle text-4xl md:text-4xl font-bold text-[var(--text-muted)] mb-6 overflow-hidden">
-                I am <span class="text-[var(--text)] border-b-4 border-[var(--accent)]" #typedRoles aria-hidden="true"></span>
-                <span class="sr-only" role="status" aria-live="polite">Full-stack architect, Angular developer, and UI/UX enthusiast</span>
+                I am <span class="text-[var(--text)] border-b-4 border-[var(--accent)]" #typedRoles
+                    aria-hidden="true"></span>
+                <span class="sr-only" role="status" aria-live="polite">Full-stack architect, Angular developer, and
+                    UI/UX enthusiast</span>
             </h3>
 
             <!-- CTAs -->
-            <p class="text-sm text-[var(--text-muted)] mb-6 max-w-xl">I build accessible, maintainable web apps with modern tooling and thoughtful UX.</p>
+            <p class="text-sm text-[var(--text-muted)] mb-6 max-w-xl">I build accessible, maintainable web apps with
+                modern tooling and thoughtful UX.</p>
 
             <div class="hero-cta flex gap-4 flex-wrap justify-center md:justify-start">
                 <a class="group relative px-8 py-4 rounded-2xl font-bold bg-[var(--accent)] text-[var(--bg-main)] overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl hover:shadow-[var(--accent)]/30 active:scale-95 flex items-center gap-3"
@@ -38,7 +42,7 @@
                 </a>
 
                 <a class="group border-2 border-[var(--accent)] text-[var(--accent)] px-8 py-4 rounded-2xl font-bold hover:bg-[var(--accent)] hover:text-[var(--bg-main)] transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-3 active:scale-95"
-                    href="cv/Eslam%20Ahmed%20Mahmoud%20Ghanem1.pdf" download="Eslam-Ahmed-Ghanem-CV.pdf">
+                    href="cv/Eslam%20Ahmed%20Mahmoud%20Ghanem_CV.pdf" download="Eslam-Ahmed-Ghanem-CV.pdf">
                     <i class="fas fa-cloud-download-alt group-hover:animate-bounce"></i>
                     <span>Grab Resume</span>
                 </a>
@@ -46,12 +50,15 @@
 
             <div
                 class="mt-12 flex items-center justify-center md:justify-start gap-6 text-[var(--text-muted)] text-2xl">
-                <a href="https://github.com/eslamghanm" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in new tab)"
-                    class="hover:text-[var(--accent)] transition-colors"><i class="fab fa-github"></i></a>
-                <a href="https://linkedin.com/in/eslam-ghanem-aa404b2a3" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in new tab)"
-                    class="hover:text-[var(--accent)] transition-colors"><i class="fab fa-linkedin"></i></a>
-                <a href="https://wa.me/201280102968" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp (opens in new tab)"
-                    class="hover:text-[var(--accent)] transition-colors"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://github.com/eslamghanm" target="_blank" rel="noopener noreferrer"
+                    aria-label="GitHub (opens in new tab)" class="hover:text-[var(--accent)] transition-colors"><i
+                        class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/eslam-ghanem-aa404b2a3" target="_blank" rel="noopener noreferrer"
+                    aria-label="LinkedIn (opens in new tab)" class="hover:text-[var(--accent)] transition-colors"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="https://wa.me/201280102968" target="_blank" rel="noopener noreferrer"
+                    aria-label="WhatsApp (opens in new tab)" class="hover:text-[var(--accent)] transition-colors"><i
+                        class="fab fa-whatsapp"></i></a>
             </div>
         </div>
 
@@ -71,8 +78,10 @@
             </div>
             <!-- Small secondary portrait (uses second personal image) -->
             <div *ngIf="themeService.isDarkMode()" class="absolute -top-6 -right-6 z-30 pointer-events-none">
-                <div class="bg-[var(--bg-elevated)] p-1 rounded-full border border-[var(--border)] shadow-lg overflow-hidden w-16 h-16 md:w-20 md:h-20">
-                    <img src="images/islam.jpg" alt="Eslam Ghanem — secondary portrait" class="w-full h-full object-cover rounded-full" loading="lazy" />
+                <div
+                    class="bg-[var(--bg-elevated)] p-1 rounded-full border border-[var(--border)] shadow-lg overflow-hidden w-16 h-16 md:w-20 md:h-20">
+                    <img src="images/islam.jpg" alt="Eslam Ghanem — secondary portrait"
+                        class="w-full h-full object-cover rounded-full" loading="lazy" />
                 </div>
             </div>
 
@@ -85,8 +94,10 @@
     </div>
 
     <!-- Scroll Indicator -->
-    <a href="#about" aria-label="Scroll to about" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 hover:opacity-100 opacity-60">
-        <div class="w-6 h-10 border-2 border-[var(--text-muted)] rounded-full flex justify-center p-1 transition-transform duration-300 hover:translate-y-1">
+    <a href="#about" aria-label="Scroll to about"
+        class="absolute bottom-10 left-1/2 transform -translate-x-1/2 hover:opacity-100 opacity-60">
+        <div
+            class="w-6 h-10 border-2 border-[var(--text-muted)] rounded-full flex justify-center p-1 transition-transform duration-300 hover:translate-y-1">
             <div class="w-1 h-2 bg-[var(--text-muted)] rounded-full animate-bounce"></div>
         </div>
         <span class="sr-only">Scroll to About</span>

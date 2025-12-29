@@ -1,85 +1,157 @@
-<header class="site-header fixed top-0 left-0 right-0 z-[100] transition-all duration-700" id="top">
-    <!-- Enhanced Background with Gradient -->
-    <div class="absolute inset-0 bg-gradient-to-br from-[var(--accent)]/5 via-transparent to-[var(--accent)]/10 backdrop-blur-xl"></div>
-    
-    <nav
-        class="navbar enhanced-glass mx-auto mt-6 max-w-[1400px] w-[95%] rounded-3xl flex items-center justify-between gap-6 px-10 py-5 border border-white/20 shadow-[0_20px_60px_rgba(0,0,0,0.3)] relative overflow-hidden">
-        
-        <!-- Animated Background Pattern -->
-        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer"></div>
-        
-        <!-- Brand Logo with Enhanced Design -->
-        <a href="#top"
-            class="brand font-bold text-xl tracking-tight text-[var(--text)] hover:text-[var(--accent)] transition-all duration-500 transform hover:scale-110 relative z-10 group"
+<header class="fixed top-0 left-0 right-0 z-[100] transition-all duration-500 py-4" [class.py-0]="isScrolled"
+    [class.scrolled]="isScrolled" #topSection>
+
+    <!-- Background backdrop for the whole header on scroll -->
+    <div class="absolute inset-0 bg-transparent backdrop-blur-0 transition-all duration-500"
+        [class.bg-[var(--bg-main)]/80]="isScrolled" [class.backdrop-blur-xl]="isScrolled" [class.border-b]="isScrolled"
+        [class.border-[var(--accent)]/20]="isScrolled">
+    </div>
+
+    <nav class="mx-auto max-w-[1400px] w-[95%] rounded-3xl flex items-center justify-between gap-6 px-10 py-5 relative transition-all duration-500 border border-white/10 shadow-2xl"
+        [class.bg-[var(--bg-elevated)]/70]="!isScrolled" [class.backdrop-blur-md]="!isScrolled"
+        [class.mt-0]="isScrolled" [class.rounded-none]="isScrolled" [class.w-full]="isScrolled"
+        [class.max-w-none]="isScrolled" [class.px-[5%]]="isScrolled" [class.py-4]="isScrolled"
+        [class.border-none]="isScrolled" [class.shadow-none]="isScrolled">
+
+        <!-- Subtle Animated Shimmer -->
+        <div
+            class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer pointer-events-none">
+        </div>
+
+        <!-- Brand Logo - Enhanced Color -->
+        <a (click)="scrollToSection('home')"
+            class="font-black text-2xl tracking-tighter text-[var(--accent)] transition-all duration-500 transform hover:scale-110 relative z-10 group cursor-pointer flex items-center gap-1"
             aria-label="Home">
             <span class="relative">
-                E<span class="text-[var(--accent)] group-hover:animate-bounce group-hover:animate-pulse">G</span>.
-                <div class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[var(--accent)] to-[var(--accent-strong)] transition-all duration-500 group-hover:w-full"></div>
+                E<span class="group-hover:animate-bounce inline-block text-[#f59e0b]">G</span>.
+                <div
+                    class="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-[var(--accent)] to-[#f59e0b] transition-all duration-500 group-hover:w-full rounded-full">
+                </div>
             </span>
         </a>
 
         <div class="flex items-center gap-8">
-            <!-- Enhanced Navigation Links -->
-            <ul class="nav-links hidden lg:flex items-center gap-8 list-none m-0 p-0 text-sm font-medium tracking-wide"
-                id="nav-links" [class.open]="isMenuOpen">
-                <li><a href="#about"
-                        class="nav-link text-[var(--text-muted)] hover:text-[var(--accent)] transition-all duration-300 flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[var(--accent)]/10 hover:to-[var(--accent)]/5 group transform hover:scale-105">
-                        <i class="fas fa-user-ninja group-hover:animate-bounce text-xs"></i>Profile</a></li>
-                <li><a href="#skills"
-                        class="nav-link text-[var(--text-muted)] hover:text-[var(--accent)] transition-all duration-300 flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[var(--accent)]/10 hover:to-[var(--accent)]/5 group transform hover:scale-105">
-                        <i class="fas fa-vial group-hover:animate-bounce text-xs"></i>Expertise</a></li>
-                <li><a href="#projects"
-                        class="nav-link text-[var(--text-muted)] hover:text-[var(--accent)] transition-all duration-300 flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[var(--accent)]/10 hover:to-[var(--accent)]/5 group transform hover:scale-105">
-                        <i class="fas fa-layer-group group-hover:animate-bounce text-xs"></i>Projects</a></li>
-                <li><a href="#contact"
-                        class="nav-link text-[var(--text-muted)] hover:text-[var(--accent)] transition-all duration-300 flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-gradient-to-r hover:from-[var(--accent)]/10 hover:to-[var(--accent)]/5 group transform hover:scale-105">
-                        <i class="fas fa-satellite group-hover:animate-bounce text-xs"></i>Contact</a></li>
+            <!-- Navigation Links with New Icons -->
+            <ul class="hidden lg:flex items-center gap-6 list-none m-0 p-0 text-sm font-bold tracking-tight">
+                <li><a (click)="scrollToSection('about')"
+                        class="cursor-pointer transition-all duration-300 flex items-center gap-2 px-4 py-2 rounded-xl relative group"
+                        [class.text-[var(--accent)]]="activeSection() === 'about'"
+                        [class.text-[var(--text)]]="activeSection() !== 'about'">
+                        <i class="fas fa-id-card text-xs text-[#8b5cf6]" [class.animate-bounce]="activeSection() === 'about'"></i>
+                        <span>Profile</span>
+                        <div class="absolute bottom-0 left-4 right-4 h-0.5 bg-[var(--accent)] transform transition-transform duration-300"
+                            [class.scale-x-100]="activeSection() === 'about'"
+                            [class.scale-x-0]="activeSection() !== 'about'"></div>
+                    </a></li>
+                <li><a (click)="scrollToSection('skills')"
+                        class="cursor-pointer transition-all duration-300 flex items-center gap-2 px-4 py-2 rounded-xl relative group"
+                        [class.text-[var(--accent)]]="activeSection() === 'skills'"
+                        [class.text-[var(--text)]]="activeSection() !== 'skills'">
+                        <i class="fas fa-cogs text-xs text-[#ec4899]" [class.animate-bounce]="activeSection() === 'skills'"></i>
+                        <span>Expertise</span>
+                        <div class="absolute bottom-0 left-4 right-4 h-0.5 bg-[var(--accent)] transform transition-transform duration-300"
+                            [class.scale-x-100]="activeSection() === 'skills'"
+                            [class.scale-x-0]="activeSection() !== 'skills'"></div>
+                    </a></li>
+                <li><a (click)="scrollToSection('projects')"
+                        class="cursor-pointer transition-all duration-300 flex items-center gap-2 px-4 py-2 rounded-xl relative group"
+                        [class.text-[var(--accent)]]="activeSection() === 'projects'"
+                        [class.text-[var(--text)]]="activeSection() !== 'projects'">
+                        <i class="fas fa-briefcase text-xs text-[#06b6d4]"
+                            [class.animate-bounce]="activeSection() === 'projects'"></i>
+                        <span>Projects</span>
+                        <div class="absolute bottom-0 left-4 right-4 h-0.5 bg-[var(--accent)] transform transition-transform duration-300"
+                            [class.scale-x-100]="activeSection() === 'projects'"
+                            [class.scale-x-0]="activeSection() !== 'projects'"></div>
+                    </a></li>
+                <li><a (click)="scrollToSection('contact')"
+                        class="cursor-pointer transition-all duration-300 flex items-center gap-2 px-4 py-2 rounded-xl relative group"
+                        [class.text-[var(--accent)]]="activeSection() === 'contact'"
+                        [class.text-[var(--text)]]="activeSection() !== 'contact'">
+                        <i class="fas fa-paper-plane text-xs text-[#f59e0b]" [class.animate-bounce]="activeSection() === 'contact'"></i>
+                        <span>Contact</span>
+                        <div class="absolute bottom-0 left-4 right-4 h-0.5 bg-[var(--accent)] transform transition-transform duration-300"
+                            [class.scale-x-100]="activeSection() === 'contact'"
+                            [class.scale-x-0]="activeSection() !== 'contact'"></div>
+                    </a></li>
             </ul>
 
-            <!-- Enhanced Action Buttons -->
-            <div class="flex items-center gap-5">
-                <!-- Enhanced Theme Toggle Button -->
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-4">
+                <!-- Theme Toggle with Enhanced Colors -->
                 <button (click)="toggleTheme()"
-                    class="enhanced-btn w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--bg-elevated)] to-[var(--bg-main)] border-2 border-[var(--border)] flex items-center justify-center text-2xl transition-all duration-500 transform hover:rotate-12 hover:scale-110 hover:shadow-[0_10px_30px_rgba(var(--accent),0.4)] active:scale-95 group"
+                    class="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-[var(--bg-elevated)] border border-[var(--border)] flex items-center justify-center transition-all duration-300 hover:border-[#f59e0b] hover:text-[#f59e0b] transform hover:scale-110 active:scale-95 group shadow-lg"
                     [attr.aria-label]="themeService.isDarkMode() ? 'Switch to light mode' : 'Switch to dark mode'">
-                    <div class="transition-all duration-500 group-hover:animate-spin">
-                        @if (themeService.isDarkMode()) {
-                        <i class="fas fa-sun text-yellow-400 group-hover:text-yellow-300"></i>
-                        } @else {
-                        <i class="fas fa-moon text-indigo-400 group-hover:text-indigo-300"></i>
-                        }
+                    <div class="transition-all duration-500 group-hover:rotate-[360deg] text-xl">
+                        <i *ngIf="themeService.isDarkMode()" class="fas fa-sun text-[#fbbf24]"></i>
+                        <i *ngIf="!themeService.isDarkMode()" class="fas fa-moon text-[#6366f1]"></i>
                     </div>
                 </button>
 
-                <!-- Enhanced Mobile Menu Toggle -->
+                <!-- Mobile Toggle -->
                 <button
-                    class="enhanced-btn nav-toggle lg:hidden w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--accent)] to-[var(--accent-strong)] text-white flex items-center justify-center text-2xl transition-all duration-500 transform hover:scale-110 hover:shadow-[0_10px_30px_rgba(var(--accent),0.6)] active:scale-95"
-                    aria-label="Toggle navigation" [attr.aria-expanded]="isMenuOpen" aria-controls="nav-links"
-                    (click)="toggleMenu()">
-                    <div class="transition-all duration-300" [class.rotate-45]="isMenuOpen">
-                        <i class="fas" [class.fa-bars]="!isMenuOpen" [class.fa-times]="isMenuOpen"></i>
+                    class="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-[#f59e0b] text-white flex items-center justify-center transition-all duration-300 transform hover:scale-110 active:scale-95 shadow-lg lg:hidden relative z-10"
+                    aria-label="Toggle navigation" (click)="toggleMenu()">
+                    <div class="tricky-burger relative" [class.open]="isMenuOpen">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- Enhanced Mobile Dropdown -->
-    <div class="lg:hidden absolute top-28 left-[2.5%] w-[95%] enhanced-glass rounded-[2.5rem] border border-white/20 shadow-[0_25px_80px_rgba(0,0,0,0.4)] p-10 transform transition-all duration-700 translate-y-[-30%] opacity-0 pointer-events-none overflow-hidden"
-        [class.mobile-nav-open]="isMenuOpen">
-        <!-- Animated Background -->
-        <div class="absolute inset-0 bg-gradient-to-br from-[var(--accent)]/20 via-transparent to-[var(--accent)]/10 animate-pulse"></div>
-        
-        <ul class="flex flex-col gap-4 text-center text-lg font-medium tracking-wide relative z-10">
-            <li><a href="#about" (click)="toggleMenu()" class="mobile-nav-link text-[var(--text)] hover:text-[var(--accent)] block px-5 py-3 rounded-xl hover:bg-gradient-to-r hover:from-[var(--accent)]/10 hover:to-[var(--accent)]/5 transition-all duration-300 transform hover:scale-105"><i
-                        class="fas fa-user-ninja mr-3"></i>Profile</a></li>
-            <li><a href="#skills" (click)="toggleMenu()" class="mobile-nav-link text-[var(--text)] hover:text-[var(--accent)] block px-5 py-3 rounded-xl hover:bg-gradient-to-r hover:from-[var(--accent)]/10 hover:to-[var(--accent)]/5 transition-all duration-300 transform hover:scale-105"><i
-                        class="fas fa-vial mr-3"></i>Expertise</a></li>
-            <li><a href="#projects" (click)="toggleMenu()"
-                    class="mobile-nav-link text-[var(--text)] hover:text-[var(--accent)] block px-5 py-3 rounded-xl hover:bg-gradient-to-r hover:from-[var(--accent)]/10 hover:to-[var(--accent)]/5 transition-all duration-300 transform hover:scale-105"><i
-                        class="fas fa-layer-group mr-3"></i>Projects</a></li>
-            <li><a href="#contact" (click)="toggleMenu()" class="mobile-nav-link text-[var(--text)] hover:text-[var(--accent)] block px-5 py-3 rounded-xl hover:bg-gradient-to-r hover:from-[var(--accent)]/10 hover:to-[var(--accent)]/5 transition-all duration-300 transform hover:scale-105"><i
-                        class="fas fa-satellite mr-3"></i>Contact</a></li>
+    <!-- Mobile Dropdown with Enhanced Colors -->
+    <div class="lg:hidden absolute top-[5.5rem] left-[2.5%] w-[95%] rounded-[2.5rem] border border-[var(--border)] p-8 liquid-menu z-[90]"
+        [class.expand]="isMenuOpen">
+
+        <!-- Animated Content Layer -->
+        <ul class="flex flex-col gap-3 relative z-10">
+            <li><a (click)="scrollToSection('about')"
+                    class="flex items-center gap-5 px-6 py-5 rounded-2xl transition-all duration-300 transform"
+                    [class.bg-[var(--accent)]/10]="activeSection() === 'about'"
+                    [class.text-[var(--accent)]]="activeSection() === 'about'"
+                    [class.text-[var(--text)]]="activeSection() !== 'about'"
+                    [class.scale-105]="activeSection() === 'about'">
+                    <div class="w-10 h-10 rounded-xl bg-[var(--bg-main)] flex items-center justify-center shadow-inner">
+                        <i class="fas fa-id-card text-[#8b5cf6]"></i>
+                    </div>
+                    <span class="font-bold text-lg">Profile</span>
+                </a></li>
+            <li><a (click)="scrollToSection('skills')"
+                    class="flex items-center gap-5 px-6 py-5 rounded-2xl transition-all duration-300 transform"
+                    [class.bg-[var(--accent)]/10]="activeSection() === 'skills'"
+                    [class.text-[var(--accent)]]="activeSection() === 'skills'"
+                    [class.text-[var(--text)]]="activeSection() !== 'skills'"
+                    [class.scale-105]="activeSection() === 'skills'">
+                    <div class="w-10 h-10 rounded-xl bg-[var(--bg-main)] flex items-center justify-center shadow-inner">
+                        <i class="fas fa-cogs text-[#ec4899]"></i>
+                    </div>
+                    <span class="font-bold text-lg">Expertise</span>
+                </a></li>
+            <li><a (click)="scrollToSection('projects')"
+                    class="flex items-center gap-5 px-6 py-5 rounded-2xl transition-all duration-300 transform"
+                    [class.bg-[var(--accent)]/10]="activeSection() === 'projects'"
+                    [class.text-[var(--accent)]]="activeSection() === 'projects'"
+                    [class.text-[var(--text)]]="activeSection() !== 'projects'"
+                    [class.scale-105]="activeSection() === 'projects'">
+                    <div class="w-10 h-10 rounded-xl bg-[var(--bg-main)] flex items-center justify-center shadow-inner">
+                        <i class="fas fa-briefcase text-[#06b6d4]"></i>
+                    </div>
+                    <span class="font-bold text-lg">Projects</span>
+                </a></li>
+            <li><a (click)="scrollToSection('contact')"
+                    class="flex items-center gap-5 px-6 py-5 rounded-2xl transition-all duration-300 transform"
+                    [class.bg-[var(--accent)]/10]="activeSection() === 'contact'"
+                    [class.text-[var(--accent)]]="activeSection() === 'contact'"
+                    [class.text-[var(--text)]]="activeSection() !== 'contact'"
+                    [class.scale-105]="activeSection() === 'contact'">
+                    <div class="w-10 h-10 rounded-xl bg-[var(--bg-main)] flex items-center justify-center shadow-inner">
+                        <i class="fas fa-paper-plane text-[#f59e0b]"></i>
+                    </div>
+                    <span class="font-bold text-lg">Contact</span>
+                </a></li>
         </ul>
     </div>
 </header>

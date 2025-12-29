@@ -1,9 +1,7 @@
 import { Component, signal, OnInit, AfterViewInit, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { forkJoin, timer, of } from 'rxjs';
-import { catchError, timeout } from 'rxjs/operators';
-import { GithubService } from './services/github.service';
+import { timer } from 'rxjs';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { AboutComponent } from './components/about/about.component';
@@ -34,32 +32,23 @@ import { initPortfolioFeatures } from './utils/portfolio-features';
 })
 export class App implements OnInit, AfterViewInit {
   private platformId = inject(PLATFORM_ID);
-  private githubService = inject(GithubService);
-  // Signal for loading state - default to false for SSR to render content immediately
-  protected readonly isLoading = signal(false);
+
+  // Signal for loading state - default to true to show premium loader immediately
+  protected readonly isLoading = signal(true);
 
   ngOnInit() {
-    // Start pre-fetching repos
-    if (isPlatformBrowser(this.platformId)) {
-      // Set isLoading to true ONLY on client startup
-      this.isLoading.set(true);
-
-      this.githubService.getRepos('eslamghanm').subscribe({
-        error: (err) => console.error('Initial fetch failed:', err)
-      });
-    }
+    // No longer need to set true here as it's default
   }
 
   ngAfterViewInit() {
     if (!isPlatformBrowser(this.platformId)) return;
 
     // --- SAFETY SWITCH ---
-    // If something hangs, we MUST show the page after 7 seconds.
     const safetyTimer = setTimeout(() => {
       this.isLoading.set(false);
-    }, 7000);
+    }, 5000);
 
-    // Coordinate data and UI initialization
+    // Coordinate UI initialization
     try {
       document.documentElement.classList.add('js-ready');
       initPortfolioFeatures();
@@ -67,22 +56,11 @@ export class App implements OnInit, AfterViewInit {
       console.error('Feature init failed', e);
     }
 
-    // Wait for GitHub data (or timeout) then hide loader
-    this.githubService.getRepos('eslamghanm').pipe(
-      catchError(() => of([])),
-      timeout(3500)
-    ).subscribe({
-      next: () => {
-        // Add a slight delay for aesthetic smooth transition
-        setTimeout(() => {
-          clearTimeout(safetyTimer);
-          this.isLoading.set(false);
-        }, 1000);
-      },
-      error: () => {
-        clearTimeout(safetyTimer);
-        this.isLoading.set(false);
-      }
+    // Since we are now using 100% static data, we only need an aesthetic delay
+    // to show our beautiful premium loader for a brief moment.
+    timer(2000).subscribe(() => {
+      clearTimeout(safetyTimer);
+      this.isLoading.set(false);
     });
   }
 }

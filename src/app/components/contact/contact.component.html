@@ -71,37 +71,45 @@
                     class="absolute -inset-2 bg-gradient-to-tr from-[var(--accent)] to-blue-600 rounded-[2rem] opacity-30 blur-xl">
                 </div>
                 <form [formGroup]="form" (ngSubmit)="onSubmit()"
-                    class="relative bg-[var(--bg-main)] border border-[var(--border)] p-8 md:p-12 rounded-[2rem] shadow-2xl space-y-6" aria-label="Contact form">
-
-                    <div *ngIf="successMessage" class="toast toast-success p-4 rounded-md text-sm">{{ successMessage }}</div>
-                    <div *ngIf="errorMessage" class="toast toast-error p-4 rounded-md text-sm">{{ errorMessage }}</div>
+                    class="relative bg-[var(--bg-main)] border border-[var(--border)] p-8 md:p-12 rounded-[2rem] shadow-2xl space-y-6"
+                    aria-label="Contact form">
 
                     <div class="grid md:grid-cols-2 gap-6">
                         <div class="form-field">
-                            <label for="name" class="text-sm font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3 block">Your Name</label>
+                            <label for="name"
+                                class="text-sm font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3 block">Your
+                                Name</label>
                             <div class="relative">
-                                <i class="far fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-[var(--accent)]"></i>
+                                <i
+                                    class="far fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-[var(--accent)]"></i>
                                 <input id="name" formControlName="name" type="text" placeholder="Islam"
-                                    [attr.aria-invalid]="name?.invalid && (name?.touched || name?.dirty)" aria-required="true"
+                                    [attr.aria-invalid]="name?.invalid && (name?.touched || name?.dirty)"
+                                    aria-required="true"
                                     class="w-full bg-[var(--bg-elevated)] border-2 border-transparent focus:border-[var(--accent)] rounded-xl py-4 pl-12 pr-4 text-[var(--text)] transition-all outline-none" />
                             </div>
 
-                            <div *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="text-rose-500 text-xs mt-2" role="alert">
+                            <div *ngIf="name?.invalid && (name?.touched || name?.dirty)"
+                                class="text-rose-500 text-xs mt-2" role="alert">
                                 <span *ngIf="name?.errors?.['required']">Please enter your name.</span>
                                 <span *ngIf="name?.errors?.['maxlength']">Name is too long.</span>
                             </div>
                         </div>
 
                         <div class="form-field">
-                            <label for="email" class="text-sm font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3 block">Email Address</label>
+                            <label for="email"
+                                class="text-sm font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3 block">Email
+                                Address</label>
                             <div class="relative">
-                                <i class="far fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-[var(--accent)]"></i>
+                                <i
+                                    class="far fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-[var(--accent)]"></i>
                                 <input id="email" formControlName="email" type="email" placeholder="islam@example.com"
-                                    [attr.aria-invalid]="email?.invalid && (email?.touched || email?.dirty)" aria-required="true"
+                                    [attr.aria-invalid]="email?.invalid && (email?.touched || email?.dirty)"
+                                    aria-required="true"
                                     class="w-full bg-[var(--bg-elevated)] border-2 border-transparent focus:border-[var(--accent)] rounded-xl py-4 pl-12 pr-4 text-[var(--text)] transition-all outline-none" />
                             </div>
 
-                            <div *ngIf="email?.invalid && (email?.touched || email?.dirty)" class="text-rose-500 text-xs mt-2" role="alert">
+                            <div *ngIf="email?.invalid && (email?.touched || email?.dirty)"
+                                class="text-rose-500 text-xs mt-2" role="alert">
                                 <span *ngIf="email?.errors?.['required']">Please enter your email.</span>
                                 <span *ngIf="email?.errors?.['email']">Please enter a valid email address.</span>
                                 <span *ngIf="email?.errors?.['maxlength']">Email is too long.</span>
@@ -110,43 +118,40 @@
                     </div>
 
                     <div class="form-field">
-                        <label for="message" class="text-sm font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3 block">Project Vision</label>
+                        <label for="message"
+                            class="text-sm font-bold uppercase tracking-widest text-[var(--text-muted)] mb-3 block">Project
+                            Vision</label>
                         <div class="relative">
                             <i class="far fa-comment-dots absolute left-4 top-6 text-[var(--accent)]"></i>
-                            <textarea id="message" formControlName="message" rows="6" placeholder="Tell me about your project dreams..."
-                                [attr.aria-invalid]="message?.invalid && (message?.touched || message?.dirty)" aria-required="true"
+                            <textarea id="message" formControlName="message" rows="6"
+                                placeholder="Tell me about your project dreams..."
+                                [attr.aria-invalid]="message?.invalid && (message?.touched || message?.dirty)"
+                                aria-required="true"
                                 class="w-full bg-[var(--bg-elevated)] border-2 border-transparent focus:border-[var(--accent)] rounded-xl py-4 pl-12 pr-4 text-[var(--text)] transition-all outline-none resize-none"></textarea>
                         </div>
 
-                        <div *ngIf="message?.invalid && (message?.touched || message?.dirty)" class="text-rose-500 text-xs mt-2" role="alert">
+                        <div *ngIf="message?.invalid && (message?.touched || message?.dirty)"
+                            class="text-rose-500 text-xs mt-2" role="alert">
                             <span *ngIf="message?.errors?.['required']">Please enter a message.</span>
                             <span *ngIf="message?.errors?.['maxlength']">Message is too long.</span>
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-4">
+                    <div class="flex flex-col sm:flex-row items-center gap-4">
                         <button type="submit" [disabled]="form.invalid || submitting"
-                            class="flex-1 group bg-[var(--accent)] disabled:opacity-50 disabled:cursor-not-allowed text-[var(--bg-main)] font-black py-4 rounded-2xl flex items-center justify-center gap-3 transition-all transform hover:scale-[1.02] hover:rotate-1 active:scale-95 shadow-xl hover:shadow-[var(--accent)]/40">
-                            <span *ngIf="!submitting" class="text-lg uppercase tracking-tighter">Ignite Conversation</span>
+                            class="w-full sm:flex-1 group bg-[var(--accent)] disabled:opacity-50 disabled:cursor-not-allowed text-[var(--bg-main)] font-black py-4 rounded-2xl flex items-center justify-center gap-3 transition-all transform hover:scale-[1.02] hover:rotate-1 active:scale-95 shadow-xl hover:shadow-[var(--accent)]/40">
+                            <span *ngIf="!submitting" class="text-lg uppercase tracking-tighter">Ignite
+                                Conversation</span>
                             <span *ngIf="submitting" class="flex items-center gap-3">
-                                <svg class="w-5 h-5 animate-spin text-[var(--bg-main)]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-                                </svg>
-                                <span class="text-sm uppercase tracking-tighter">Sending…</span>
+                                <i class="fas fa-circle-notch animate-spin"></i>
+                                <span class="text-sm uppercase tracking-tighter">Preparing…</span>
                             </span>
                         </button>
 
-                        <!-- Send mode tooltip / indicator -->
-                        <div class="flex items-center gap-2 ml-2 text-xs">
-                            <button type="button" class="send-mode-btn flex items-center gap-2" [attr.title]="getSendModeLabel()" [attr.aria-label]="getSendModeLabel()">
-                                <i class="fas fa-info-circle text-[var(--text-muted)]"></i>
-                                <span class="hidden sm:inline text-[var(--text-muted)]">{{ sendMode === 'server' ? 'Server' : (sendMode === 'mailto' ? 'Mail client' : 'Fallback') }}</span>
-                            </button>
-                        </div>
-
-                        <button type="button" (click)="copyMessage()" class="px-4 py-3 rounded-xl border border-[var(--border)] text-[var(--text)] hover:bg-[var(--bg-elevated)]">
-                            Copy Message
+                        <button type="button" (click)="copyMessage()"
+                            class="w-full sm:w-auto px-8 py-4 rounded-2xl border-2 border-[var(--border)] text-[var(--text)] font-bold hover:bg-[var(--bg-elevated)] hover:border-[var(--accent)] transition-all flex items-center justify-center gap-2">
+                            <i class="far fa-copy"></i>
+                            Copy Data
                         </button>
                     </div>
                 </form>
@@ -154,29 +159,68 @@
                 <!-- Fallback plain HTML form for users without JavaScript or for direct Formspree posts -->
                 <noscript>
                     <div class="relative bg-[var(--bg-main)] border border-[var(--border)] p-6 rounded-[1.25rem] mt-6">
-                        <p class="text-sm text-[var(--text-muted)] mb-4">JavaScript appears to be disabled. You can submit the form directly:</p>
+                        <p class="text-sm text-[var(--text-muted)] mb-4">JavaScript appears to be disabled. You can
+                            submit the form directly:</p>
                         <form action="https://formspree.io/f/xeeqjllk" method="POST">
                             <!-- Formspree hidden fields -->
                             <input type="hidden" name="_subject" value="Portfolio Contact" />
                             <input type="hidden" name="_next" value="/thanks" />
 
                             <label class="block mb-3 text-sm text-[var(--text-muted)]">Your name:
-                                <input type="text" name="name" class="w-full mt-1 rounded-xl p-2 border border-[var(--border)] bg-[var(--bg-elevated)]" />
+                                <input type="text" name="name"
+                                    class="w-full mt-1 rounded-xl p-2 border border-[var(--border)] bg-[var(--bg-elevated)]" />
                             </label>
 
                             <label class="block mb-3 text-sm text-[var(--text-muted)]">Your email:
-                                <input type="email" name="email" class="w-full mt-1 rounded-xl p-2 border border-[var(--border)] bg-[var(--bg-elevated)]" />
+                                <input type="email" name="email"
+                                    class="w-full mt-1 rounded-xl p-2 border border-[var(--border)] bg-[var(--bg-elevated)]" />
                             </label>
 
                             <label class="block mb-4 text-sm text-[var(--text-muted)]">Your message:
-                                <textarea name="message" rows="4" class="w-full mt-1 rounded-xl p-2 border border-[var(--border)] bg-[var(--bg-elevated)]"></textarea>
+                                <textarea name="message" rows="4"
+                                    class="w-full mt-1 rounded-xl p-2 border border-[var(--border)] bg-[var(--bg-elevated)]"></textarea>
                             </label>
 
-                            <button type="submit" class="bg-[var(--accent)] text-[var(--bg-main)] font-bold px-6 py-2 rounded-xl">Send</button>
+                            <button type="submit"
+                                class="bg-[var(--accent)] text-[var(--bg-main)] font-bold px-6 py-2 rounded-xl">Send</button>
                         </form>
                     </div>
                 </noscript>
             </div>
+        </div>
+    </div>
+
+    <!-- Success/Error Popup Modal -->
+    <div *ngIf="showPopup" 
+         class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black bg-opacity-50"
+         (click)="closePopup()">
+        <div class="bg-[var(--bg-main)] border border-[var(--border)] rounded-2xl p-8 max-w-md w-full shadow-2xl transform transition-all duration-300"
+             (click)="$event.stopPropagation()">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-[var(--text)]">
+                    {{ popupType === 'success' ? 'Success!' : 'Error!' }}
+                </h3>
+                <button (click)="closePopup()" 
+                        class="w-8 h-8 rounded-full bg-[var(--bg-elevated)] hover:bg-[var(--border)] flex items-center justify-center transition-colors">
+                    <i class="fas fa-times text-[var(--text-muted)]"></i>
+                </button>
+            </div>
+            
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center"
+                     [class.bg-green-500]="popupType === 'success'"
+                     [class.bg-red-500]="popupType === 'error'">
+                    <i class="fas text-white" 
+                       [class.fa-check]="popupType === 'success'"
+                       [class.fa-exclamation]="popupType === 'error'"></i>
+                </div>
+                <p class="text-[var(--text)]">{{ popupMessage }}</p>
+            </div>
+            
+            <button (click)="closePopup()"
+                    class="w-full bg-[var(--accent)] text-[var(--bg-main)] font-bold py-3 rounded-xl hover:opacity-90 transition-opacity">
+                Got it!
+            </button>
         </div>
     </div>
 </section>

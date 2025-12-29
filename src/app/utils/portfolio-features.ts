@@ -8,15 +8,25 @@ export function initPortfolioFeatures() {
         const revealEls = document.querySelectorAll('.reveal');
         if (!revealEls.length) return;
 
+        // Force reveal matching the app's loading sequence
+        const forceVisible = (el: HTMLElement, delay: number = 0) => {
+            setTimeout(() => {
+                el.classList.add('visible');
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }, delay);
+        };
+
         if ('IntersectionObserver' in window) {
             const io = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        io.unobserve(entry.target);
+                        const target = entry.target as HTMLElement;
+                        target.classList.add('visible');
+                        io.unobserve(target);
                     }
                 });
-            }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
             revealEls.forEach((el, i) => {
                 const target = el as HTMLElement;
@@ -25,23 +35,24 @@ export function initPortfolioFeatures() {
                     target.style.transitionDelay = `${delay}ms`;
                     io.observe(target);
 
-                    // Safety fallback: show after 2 seconds regardless of scroll
-                    setTimeout(() => {
-                        if (!target.classList.contains('visible')) {
-                            target.classList.add('visible');
-                        }
-                    }, 2000 + delay);
+                    // Safety fallback: show after a reasonable time regardless of scroll
+                    forceVisible(target, 2500 + delay);
                 }
             });
         } else {
-            revealEls.forEach((el) => (el as HTMLElement).classList.add('visible'));
+            revealEls.forEach((el, i) => forceVisible(el as HTMLElement, i * 50));
         }
     };
 
-    // Run on load and dynamic markers
+    // Run on load and periodically to catch dynamic content
     setupReveal();
     setTimeout(setupReveal, 500);
-    setTimeout(setupReveal, 1500);
+    setTimeout(setupReveal, 2000);
+
+    // Global fallback to reveal everything if something goes wrong
+    (window as any).revealAllElements = () => {
+        document.querySelectorAll('.reveal').forEach(el => (el as HTMLElement).classList.add('visible'));
+    };
 
     // Smooth scroll
     document.addEventListener('click', (e: MouseEvent) => {

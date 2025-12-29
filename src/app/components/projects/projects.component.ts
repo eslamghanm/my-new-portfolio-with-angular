@@ -1,6 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GitHubRepo, GithubService } from '../../services/github.service';
 
 @Component({
   selector: 'app-projects',
@@ -10,103 +9,72 @@ import { GitHubRepo, GithubService } from '../../services/github.service';
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
-  projects: GitHubRepo[] = [];
-  loading = true;
-  private githubService = inject(GithubService);
+  // Static source of truth - No API calls
+  projects: any[] = [
+    {
+      name: 'appointment-booking-system',
+      description: 'ITI Graduation Project — Full‑stack appointment booking system (Laravel backend + Angular frontend). Features: user authentication, calendar scheduling, email notifications, admin dashboard, and REST API.',
+      html_url: 'https://github.com/eslamghanm/appointment-booking-system',
+      stargazers_count: 12,
+      language: 'PHP',
+      topics: ['Laravel', 'Angular', 'MySQL', 'Auth'],
+      fork: false,
+      archived: false
+    },
+    {
+      name: 'Multi-actors-E-commerce-system-',
+      description: 'Enterprise-grade multi-role platform with complex vendor dashboards and secure payments.',
+      html_url: 'https://github.com/eslamghanm/Multi-actors-E-commerce-system-',
+      stargazers_count: 8,
+      language: 'JavaScript',
+      homepage: 'https://storm123.netlify.app/',
+      topics: ['Node.js', 'React', 'MongoDB'],
+      fork: false,
+      archived: false
+    },
+    {
+      name: 'ghanem-CMS',
+      description: 'Clinic management system focused on blazing-fast performance and offline synchronization.',
+      html_url: 'https://github.com/eslamghanm/ghanem-CMS',
+      stargazers_count: 5,
+      language: 'TypeScript',
+      homepage: 'https://gahnem-cms.netlify.app/dashboard',
+      topics: ['Angular', 'Firebase', 'PWA'],
+      fork: false,
+      archived: false
+    },
+    {
+      name: 'eventura-event-management-system',
+      description: 'Platform with multi-threaded scheduling and custom workflow orchestration.',
+      html_url: 'https://github.com/eslamghanm/eventura-event-management-system',
+      stargazers_count: 10,
+      language: 'JavaScript',
+      homepage: 'https://eventplannersystem.netlify.app/',
+      topics: ['JavaScript', 'API', 'UI/UX'],
+      fork: false,
+      archived: false
+    },
+    {
+      name: 'JobPosting',
+      description: 'A robust recruitment system with resume parsing and multi-user access control.',
+      html_url: 'https://github.com/eslamghanm/JobPosting',
+      stargazers_count: 3,
+      language: 'PHP',
+      topics: ['PHP', 'MySQL', 'Bootstrap'],
+      fork: false,
+      archived: false
+    }
+  ];
 
-  constructor() { }
+  loading = false;
 
   ngOnInit() {
-    this.fetchProjects();
-  }
-
-  private fetchProjects() {
-    this.githubService.getRepos('eslamghanm').subscribe({
-      next: (repos) => {
-        // Filter out forks and take top 6
-        const dynamicProjects = repos.filter(repo => !repo.fork).slice(0, 6);
-
-        if (dynamicProjects.length > 0) {
-          this.projects = dynamicProjects;
-          this.loading = false;
-        } else {
-          // Fallback if no repos found (e.g. rate limit or empty profile)
-          this.loadFallbackProjects();
-        }
-      },
-      error: (err) => {
-        console.error('Error fetching GitHub repositories:', err);
-        // Load fallback if API fails
-        this.loadFallbackProjects();
-      }
-    });
-  }
-
-  private loadFallbackProjects() {
-    // Static curated projects (display-only)
-    this.projects = [
-      {
-        name: 'appointment-booking-system',
-        description: 'ITI Graduation Project — Full‑stack appointment booking system (Laravel backend + Angular frontend). Features: user authentication, calendar scheduling, email notifications, admin dashboard, and REST API.',
-        html_url: 'https://github.com/eslamghanm/appointment-booking-system',
-        stargazers_count: 0,
-        language: 'PHP',
-        updated_at: new Date().toISOString(),
-        topics: ['Laravel', 'Angular', 'MySQL', 'Auth', 'Scheduling'],
-        fork: false,
-        archived: false
-      },
-      {
-        name: 'Multi-actors-E-commerce-system-',
-        description: 'Enterprise-grade multi-role platform with complex vendor dashboards and secure payments.',
-        html_url: 'https://github.com/eslamghanm/Multi-actors-E-commerce-system-',
-        stargazers_count: 0,
-        language: 'JavaScript',
-        updated_at: new Date().toISOString(),
-        homepage: 'https://storm123.netlify.app/',
-        fork: false,
-        archived: false
-      },
-      {
-        name: 'ghanem-CMS',
-        description: 'Clinic management system focused on blazing-fast performance and offline synchronization.',
-        html_url: 'https://github.com/eslamghanm/ghanem-CMS',
-        stargazers_count: 0,
-        language: 'TypeScript',
-        updated_at: new Date().toISOString(),
-        homepage: 'https://gahnem-cms.netlify.app/dashboard',
-        fork: false,
-        archived: false
-      },
-      {
-        name: 'eventura-event-management-system',
-        description: 'Platform with multi-threaded scheduling and custom workflow orchestration.',
-        html_url: 'https://github.com/eslamghanm/eventura-event-management-system',
-        stargazers_count: 0,
-        language: 'JavaScript',
-        updated_at: new Date().toISOString(),
-        homepage: 'https://eventplannersystem.netlify.app/',
-        fork: false,
-        archived: false
-      },
-      {
-        name: 'JobPosting',
-        description: 'A robust recruitment system with resume parsing and multi-user access control.',
-        html_url: 'https://github.com/eslamghanm/JobPosting',
-        stargazers_count: 0,
-        language: 'PHP',
-        updated_at: new Date().toISOString(),
-        fork: false,
-        archived: false
-      }
-    ];
-
-    this.loading = false; // show static projects immediately
+    console.log('ProjectsComponent: Initialized with static local data.');
   }
 
   getProjectImage(repoName: string): string {
     const imageMap: { [key: string]: string } = {
-      'appointment-booking-system': 'images/appointment-booking.jpg',
+      'appointment-booking-system': 'images/app.jpeg',
       'Multi-actors-E-commerce-system-': 'images/e-commerce.jpg',
       'ghanem-CMS': 'images/dental-cms.jpg',
       'eventura-event-management-system': 'images/eventura.jpg',
@@ -137,7 +105,7 @@ export class ProjectsComponent implements OnInit {
     return colorMap[language || ''] || '#10b981';
   }
 
-  trackByProject(index: number, project: GitHubRepo): string {
+  trackByProject(index: number, project: any): string {
     return project.name;
   }
 
