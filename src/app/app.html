@@ -1,13 +1,19 @@
-<!-- Loading Screen -->
-<div *ngIf="isLoading" class="fixed inset-0 bg-[var(--bg-main)] flex items-center justify-center z-50">
+<!-- Loading Screen Overlay -->
+<div
+  class="fixed inset-0 bg-[var(--bg-main)] flex items-center justify-center z-[100] transition-opacity duration-700 pointer-events-none opacity-0"
+  [class.opacity-100]="isLoading()" [class.pointer-events-auto]="isLoading()">
   <div class="text-center">
-    <div class="inline-block animate-spin rounded-full h-16 w-16 border-4 border-[var(--accent)] border-t-transparent mb-4"></div>
+    <div
+      class="inline-block animate-spin rounded-full h-16 w-16 border-4 border-[var(--accent)] border-t-transparent mb-4">
+    </div>
     <p class="text-[var(--text)] text-xl">Loading portfolio...</p>
   </div>
 </div>
 
-<!-- Portfolio Application -->
-<div *ngIf="!isLoading">
+<!-- Portfolio Application Content -->
+<!-- We keep it always present for SSR/SEO and just hide it visually if needed, 
+     but usually we want the loader to just overlay it. -->
+<div [class.opacity-0]="isLoading()" class="transition-opacity duration-500">
   <app-navbar></app-navbar>
   <app-hero></app-hero>
   <main>

@@ -35,52 +35,54 @@ import { initPortfolioFeatures } from './utils/portfolio-features';
 export class App implements OnInit, AfterViewInit {
   private platformId = inject(PLATFORM_ID);
   private githubService = inject(GithubService);
-  protected readonly title = signal('portifolio_with_angular');
-  protected readonly isLoading = signal(true);
+  // Signal for loading state - default to false for SSR to render content immediately
+  protected readonly isLoading = signal(false);
 
   ngOnInit() {
-    // Start pre-fetching repos to cache them in the service
+    // Start pre-fetching repos
     if (isPlatformBrowser(this.platformId)) {
+      // Set isLoading to true ONLY on client startup
+      this.isLoading.set(true);
+
       this.githubService.getRepos('eslamghanm').subscribe({
-        error: (err) => console.error('Initial repo fetch failed:', err)
+        error: (err) => console.error('Initial fetch failed:', err)
       });
     }
   }
 
   ngAfterViewInit() {
-    // Initialize portfolio interactive features after full view loads
-    if (isPlatformBrowser(this.platformId)) {
-      try {
-        document.documentElement.classList.add('js-ready');
-        // Initialize interactive animations/features
-        initPortfolioFeatures();
-      } catch (error) {
-        console.error('Error during portfolio feature initialization:', error);
-      } finally {
-        // COORDINATED LOADING: Wait for real data OR a fallback timeout
-        // This ensures the loader stays visible until data is likely ready
-        forkJoin([
-          // Wait for GitHub repos (already pre-firing in ngOnInit)
-          this.githubService.getRepos('eslamghanm').pipe(
-            catchError(() => of([])),
-            timeout(4000) // Don't wait more than 4s for GitHub
-          ),
-          // Minimum aesthetic delay for the loader (so it doesn't flicker)
-          timer(1200)
-        ]).pipe(
-          catchError(() => of([])),
-          timeout(6000) // Absolute safety timeout for the whole sequence
-        ).subscribe({
-          next: () => {
-            this.isLoading.set(false);
-          },
-          error: () => {
-            this.isLoading.set(false);
-          }
-        });
-      }
-    } else {
-      // On server, we keep isLoading=true which the client will then hydrate
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    // --- SAFETY SWITCH ---
+    // If something hangs, we MUST show the page after 7 seconds.
+    const safetyTimer = setTimeout(() => {
+      this.isLoading.set(false);
+    }, 7000);
+
+    // Coordinate data and UI initialization
+    try {
+      document.documentElement.classList.add('js-ready');
+      initPortfolioFeatures();
+    } catch (e) {
+      console.error('Feature init failed', e);
     }
+
+    // Wait for GitHub data (or timeout) then hide loader
+    this.githubService.getRepos('eslamghanm').pipe(
+      catchError(() => of([])),
+      timeout(3500)
+    ).subscribe({
+      next: () => {
+        // Add a slight delay for aesthetic smooth transition
+        setTimeout(() => {
+          clearTimeout(safetyTimer);
+          this.isLoading.set(false);
+        }, 1000);
+      },
+      error: () => {
+        clearTimeout(safetyTimer);
+        this.isLoading.set(false);
+      }
+    });
   }
 }
