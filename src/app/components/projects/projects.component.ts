@@ -89,7 +89,7 @@ export class ProjectsComponent implements OnInit {
       'eventura-event-management-system': 'images/eventura.jpg',
       'JobPosting': 'images/jop-posting.png'
     };
-    return imageMap[repoName] || 'images/final me.jpg';
+    return imageMap[repoName] || 'images/final-me.jpg';
   }
 
   getProjectType(language?: string): string {
