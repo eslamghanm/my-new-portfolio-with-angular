@@ -41,7 +41,8 @@
     "express": "^5.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "typed.js": "^2.1.0"
+    "typed.js": "^2.1.0",
+    "@netlify/angular-runtime": "^3.0.1"
   },
   "devDependencies": {
     "@angular/build": "^21.0.2",
