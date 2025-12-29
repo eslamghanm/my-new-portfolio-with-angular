@@ -1,15 +1,25 @@
+<!-- Loading Screen -->
+<div *ngIf="isLoading" class="fixed inset-0 bg-[var(--bg-main)] flex items-center justify-center z-50">
+  <div class="text-center">
+    <div class="inline-block animate-spin rounded-full h-16 w-16 border-4 border-[var(--accent)] border-t-transparent mb-4"></div>
+    <p class="text-[var(--text)] text-xl">Loading portfolio...</p>
+  </div>
+</div>
+
 <!-- Portfolio Application -->
-<app-navbar></app-navbar>
-<app-hero></app-hero>
-<main>
-  <app-about></app-about>
-  <app-skills></app-skills>
-  <app-projects></app-projects>
-  <app-contact></app-contact>
-</main>
-<app-footer></app-footer>
+<div *ngIf="!isLoading">
+  <app-navbar></app-navbar>
+  <app-hero></app-hero>
+  <main>
+    <app-about></app-about>
+    <app-skills></app-skills>
+    <app-projects></app-projects>
+    <app-contact></app-contact>
+  </main>
+  <app-footer></app-footer>
 
-<!-- Scroll to Top Button -->
-<app-scroll-to-top></app-scroll-to-top>
+  <!-- Scroll to Top Button -->
+  <app-scroll-to-top></app-scroll-to-top>
 
-<router-outlet />
+  <router-outlet />
+</div>

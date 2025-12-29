@@ -32,6 +32,7 @@ import { initPortfolioFeatures } from './utils/portfolio-features';
 export class App implements OnInit, AfterViewInit {
   private platformId = inject(PLATFORM_ID);
   protected readonly title = signal('portifolio_with_angular');
+  protected readonly isLoading = signal(true);
 
   ngOnInit() { }
 
@@ -41,6 +42,7 @@ export class App implements OnInit, AfterViewInit {
       document.documentElement.classList.add('js-ready');
       setTimeout(() => {
         initPortfolioFeatures();
+        this.isLoading.set(false); // Hide loading after initialization
       }, 300);
     }
   }
