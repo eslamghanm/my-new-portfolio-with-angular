@@ -3,7 +3,7 @@
   publish = "dist/portifolio_with_angular/browser"
 
 [context.production.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "18.x"
 
 [[redirects]]
   from = "/*"
