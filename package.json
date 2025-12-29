@@ -9,7 +9,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:portifolio_with_angular": "node dist/portifolio_with_angular/server/server.mjs",
-    "deploy:netlify": "npx netlify deploy --prod --dir=dist/portifolio_with_angular/browser"
+    "deploy:netlify": "npx netlify deploy --prod --dir=dist/portifolio_with_angular/browser",
+    "postinstall": "node ./node_modules/esbuild/install.js || true"
   },
   "prettier": {
     "printWidth": 100,
@@ -53,6 +54,7 @@
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
     "typescript": "~5.9.2",
-    "vitest": "^4.0.8"
+    "vitest": "^4.0.8",
+    "esbuild": "^0.19.4"
   }
 }
