@@ -5,13 +5,14 @@
                 Creative <span class="text-[var(--accent)]">Solutions</span>
             </h2>
             <p class="text-[var(--text-muted)] text-xl max-w-2xl mx-auto">
-                A curated selection of static projects (manually curated, not fetched from GitHub API).
+                A showcase of my latest development work, open-source projects, and technical contributions.
             </p>
         </div>
 
         <!-- Loading State -->
         <div *ngIf="loading" class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div *ngFor="let i of [1,2,3,4]" class="project-card relative group rounded-[2.5rem] overflow-hidden bg-[var(--bg-elevated)] border border-[var(--border)] animate-pulse">
+            <div *ngFor="let i of [1,2,3,4]"
+                class="project-card relative group rounded-[2.5rem] overflow-hidden bg-[var(--bg-elevated)] border border-[var(--border)] animate-pulse">
                 <div class="h-80 bg-[var(--bg-surface)]"></div>
                 <div class="p-10">
                     <div class="flex justify-between items-start mb-4">
@@ -26,26 +27,26 @@
 
         <!-- Projects Grid -->
         <div *ngIf="!loading" class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <article *ngFor="let project of projects; trackBy: trackByProject"
-                tabindex="0"
+            <article *ngFor="let project of projects; trackBy: trackByProject" tabindex="0"
                 class="project-card relative group rounded-[2.5rem] overflow-hidden bg-[var(--bg-elevated)] border border-[var(--border)] transition-all duration-700 hover:shadow-2xl hover:-translate-y-4 focus:shadow-2xl focus:-translate-y-2 reveal"
                 [style.border-color]="getProjectColor(project.language)">
                 <div class="h-80 overflow-hidden relative">
                     <img [src]="getProjectImage(project.name)"
-                        onerror="this.onerror=null;this.src='images/final-me.jpg'"
-                        [alt]="project.name"
+                        onerror="this.onerror=null;this.src='images/final-me.jpg'" [alt]="project.name"
                         class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000" />
                     <!-- Animated Overlay on Hover -->
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-[var(--bg-elevated)] via-[var(--bg-elevated)]/20 to-transparent opacity-0 group-hover:opacity-100 group-focus:opacity-100 focus-within:opacity-100 transition-opacity duration-500 flex items-center justify-center pointer-events-none group-hover:pointer-events-auto group-focus:pointer-events-auto focus-within:pointer-events-auto z-20">
                         <div
                             class="flex gap-4 transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500">
-                            <a [href]="project.html_url" target="_blank" rel="noopener noreferrer" aria-label="Open repository for {{ project.name }}"
+                            <a [href]="project.html_url" target="_blank" rel="noopener noreferrer"
+                                aria-label="Open repository for {{ project.name }}"
                                 class="w-16 h-16 rounded-2xl bg-white text-black flex items-center justify-center text-2xl hover:text-white transition-colors"
                                 [style.background-color]="getProjectColor(project.language)">
                                 <i class="fab fa-github"></i>
                             </a>
-                            <a *ngIf="project.homepage" [href]="project.homepage" target="_blank" rel="noopener noreferrer" aria-label="Open demo/homepage for {{ project.name }}"
+                            <a *ngIf="project.homepage" [href]="project.homepage" target="_blank"
+                                rel="noopener noreferrer" aria-label="Open demo/homepage for {{ project.name }}"
                                 class="w-16 h-16 rounded-2xl bg-white text-black flex items-center justify-center text-2xl hover:text-white transition-colors"
                                 [style.background-color]="getProjectColor(project.language)">
                                 <i class="fas fa-external-link-alt"></i>
@@ -79,7 +80,9 @@
 
                     <!-- Tech badges -->
                     <div *ngIf="project.topics?.length" class="mt-4 flex flex-wrap gap-2">
-                        <span *ngFor="let t of project.topics" class="px-3 py-1 rounded-full text-xs bg-[var(--bg-surface)] text-[var(--text)] border border-[var(--border)]">{{ t }}</span>
+                        <span *ngFor="let t of project.topics"
+                            class="px-3 py-1 rounded-full text-xs bg-[var(--bg-surface)] text-[var(--text)] border border-[var(--border)]">{{
+                            t }}</span>
                     </div>
 
                     <div class="mt-4 flex items-center gap-4 text-sm text-[var(--text-muted)]">

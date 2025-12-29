@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GitHubRepo } from '../../services/github.service';
+import { GitHubRepo, GithubService } from '../../services/github.service';
 
 @Component({
   selector: 'app-projects',
@@ -12,11 +12,34 @@ import { GitHubRepo } from '../../services/github.service';
 export class ProjectsComponent implements OnInit {
   projects: GitHubRepo[] = [];
   loading = true;
+  private githubService = inject(GithubService);
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
-    this.loadFallbackProjects();
+    this.fetchProjects();
+  }
+
+  private fetchProjects() {
+    this.githubService.getRepos('eslamghanm').subscribe({
+      next: (repos) => {
+        // Filter out forks and take top 6
+        const dynamicProjects = repos.filter(repo => !repo.fork).slice(0, 6);
+
+        if (dynamicProjects.length > 0) {
+          this.projects = dynamicProjects;
+          this.loading = false;
+        } else {
+          // Fallback if no repos found (e.g. rate limit or empty profile)
+          this.loadFallbackProjects();
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching GitHub repositories:', err);
+        // Load fallback if API fails
+        this.loadFallbackProjects();
+      }
+    });
   }
 
   private loadFallbackProjects() {
