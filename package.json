@@ -8,7 +8,8 @@
     "build:netlify": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:portifolio_with_angular": "node dist/portifolio_with_angular/server/server.mjs"
+    "serve:ssr:portifolio_with_angular": "node dist/portifolio_with_angular/server/server.mjs",
+    "deploy:netlify": "npx netlify deploy --prod --dir=dist/portifolio_with_angular/browser"
   },
   "prettier": {
     "printWidth": 100,
@@ -23,6 +24,9 @@
     ]
   },
   "private": true,
+  "engines": {
+    "node": ">=18"
+  },
   "packageManager": "npm@10.9.3",
   "dependencies": {
     "@angular/common": "^21.0.0",
