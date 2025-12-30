@@ -25,111 +25,85 @@
             </div>
         </div>
 
-        <div *ngIf="!loading" class="relative group/carousel">
+        <div *ngIf="!loading" class="swiper-wrapper-container relative overflow-hidden">
+            <swiper-container slides-per-view="1" navigation="true" pagination="true" keyboard="true" autoplay="true"
+                autoplay-delay="4000" autoplay-disable-on-interaction="false" loop="true" class="mySwiper"
+                style="--swiper-navigation-color: var(--accent); --swiper-pagination-color: var(--accent); --swiper-pagination-bullet-inactive-color: var(--border); --swiper-pagination-bullet-inactive-opacity: 0.5; --swiper-pagination-bullet-size: 10px; --swiper-navigation-size: 30px;">
 
-            <!-- Navigation Buttons -->
-            <!-- Navigation Buttons -->
-            <button (click)="prevProject()"
-                class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-12 z-20 w-12 h-12 md:w-16 md:h-16 rounded-full bg-[var(--bg-elevated)] border border-[var(--border)] flex items-center justify-center text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition-all duration-300 shadow-xl opacity-100 lg:opacity-0 lg:group-hover/carousel:opacity-100 transform hover:scale-110">
-                <i class="fas fa-chevron-left text-xl md:text-2xl"></i>
-            </button>
-            <button (click)="nextProject()"
-                class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-12 z-20 w-12 h-12 md:w-16 md:h-16 rounded-full bg-[var(--bg-elevated)] border border-[var(--border)] flex items-center justify-center text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition-all duration-300 shadow-xl opacity-100 lg:opacity-0 lg:group-hover/carousel:opacity-100 transform hover:scale-110">
-                <i class="fas fa-chevron-right text-xl md:text-2xl"></i>
-            </button>
-
-            <!-- Carousel Track -->
-            <div class="overflow-hidden min-h-[600px] relative">
-                <div class="transition-transform duration-700 ease-in-out flex h-full"
-                    [style.transform]="'translateX(-' + (currentProjectIndex() * 100) + '%)'">
-
-                    <div *ngFor="let project of projects; let i = index; trackBy: trackByProject"
-                        class="w-full flex-shrink-0 px-4">
-
-                        <article class="grid md:grid-cols-2 gap-8 md:gap-12 items-center h-full">
-                            <!-- Project Image -->
+                <swiper-slide *ngFor="let project of projects; let i = index; trackBy: trackByProject">
+                    <article class="grid md:grid-cols-2 gap-8 md:gap-12 items-center px-4 py-8 md:px-12">
+                        <!-- Project Image -->
+                        <div
+                            class="relative rounded-[2.5rem] overflow-hidden border border-[var(--border)] shadow-2xl h-[300px] md:h-[500px] group/image">
                             <div
-                                class="relative rounded-[2.5rem] overflow-hidden border border-[var(--border)] shadow-2xl h-[300px] md:h-[500px] group/image">
-                                <div
-                                    class="absolute inset-0 bg-black/10 group-hover/image:bg-transparent transition-colors z-10">
-                                </div>
-                                <img [src]="getProjectImage(project.name)"
-                                    class="w-full h-full object-cover transform group-hover/image:scale-110 transition-transform duration-1000"
-                                    loading="lazy" [alt]="project.name" />
+                                class="absolute inset-0 bg-black/10 group-hover/image:bg-transparent transition-colors z-10">
+                            </div>
+                            <img [src]="getProjectImage(project.name)"
+                                class="w-full h-full object-cover transform group-hover/image:scale-110 transition-transform duration-1000"
+                                loading="lazy" [alt]="project.name" />
 
-                                <!-- Overlay Actions -->
-                                <div
-                                    class="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 z-20 backdrop-blur-sm bg-black/40">
-                                    <a [href]="project.html_url" target="_blank"
-                                        class="w-16 h-16 bg-white text-black rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-xl">
-                                        <i class="fab fa-github text-3xl"></i>
-                                    </a>
-                                    <a *ngIf="project.homepage" [href]="project.homepage" target="_blank"
-                                        class="w-16 h-16 bg-[var(--accent)] text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-xl">
-                                        <i class="fas fa-external-link-alt text-2xl"></i>
-                                    </a>
+                            <!-- Overlay Actions -->
+                            <div
+                                class="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 z-20 backdrop-blur-sm bg-black/40">
+                                <a [href]="project.html_url" target="_blank"
+                                    class="w-16 h-16 bg-white text-black rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-xl">
+                                    <i class="fab fa-github text-3xl"></i>
+                                </a>
+                                <a *ngIf="project.homepage" [href]="project.homepage" target="_blank"
+                                    class="w-16 h-16 bg-[var(--accent)] text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-xl">
+                                    <i class="fas fa-external-link-alt text-2xl"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Project Content -->
+                        <div class="space-y-8 text-left">
+                            <div class="flex items-center gap-4">
+                                <span class="text-6xl font-black text-[var(--border)] opacity-30 select-none">0{{ i + 1
+                                    }}</span>
+                                <div class="h-px flex-1 bg-[var(--border)]"></div>
+                            </div>
+
+                            <h3 class="text-4xl md:text-6xl font-black text-[var(--text)] leading-tight tracking-tight">
+                                {{ formatProjectName(project.name) }}
+                            </h3>
+
+                            <p class="text-[var(--text-muted)] text-xl leading-relaxed">
+                                {{ project.description }}
+                            </p>
+
+                            <!-- Challenge / Result -->
+                            <div
+                                class="grid grid-cols-1 gap-4 p-6 bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border)] relative overflow-hidden group/star hover:border-[var(--accent)] transition-colors">
+                                <div>
+                                    <h4
+                                        class="font-bold text-[var(--text)] mb-2 text-sm uppercase flex items-center gap-2">
+                                        <i class="fas fa-mountain text-[var(--accent)]"></i> Challenge
+                                    </h4>
+                                    <p class="text-sm text-[var(--text-muted)]">{{ project.challenge || 'Building a
+                                        robust solution for complex requirements.' }}</p>
+                                </div>
+                                <div class="w-full h-px bg-[var(--border)]"></div>
+                                <div>
+                                    <h4
+                                        class="font-bold text-[var(--text)] mb-2 text-sm uppercase flex items-center gap-2">
+                                        <i class="fas fa-check-circle text-green-500"></i> Local Result
+                                    </h4>
+                                    <p class="text-sm text-[var(--text-muted)]">{{ project.result || 'Delivered
+                                        high-performance architecture.' }}</p>
                                 </div>
                             </div>
 
-                            <!-- Project Content -->
-                            <div class="space-y-8 text-left">
-                                <div class="flex items-center gap-4">
-                                    <span class="text-6xl font-black text-[var(--border)] opacity-30 select-none">0{{ i
-                                        + 1 }}</span>
-                                    <div class="h-px flex-1 bg-[var(--border)]"></div>
-                                </div>
-
-                                <h3
-                                    class="text-4xl md:text-6xl font-black text-[var(--text)] leading-tight tracking-tight">
-                                    {{ formatProjectName(project.name) }}
-                                </h3>
-
-                                <p class="text-[var(--text-muted)] text-xl leading-relaxed">
-                                    {{ project.description }}
-                                </p>
-
-                                <!-- Challenge / Result (STAR Method) -->
-                                <div
-                                    class="grid grid-cols-1 gap-4 p-6 bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border)] relative overflow-hidden group/star hover:border-[var(--accent)] transition-colors">
-                                    <div>
-                                        <h4
-                                            class="font-bold text-[var(--text)] mb-2 text-sm uppercase flex items-center gap-2">
-                                            <i class="fas fa-mountain text-[var(--accent)]"></i> Challenge
-                                        </h4>
-                                        <p class="text-sm text-[var(--text-muted)]">{{ project.challenge || 'Building a
-                                            robust solution for complex requirements.' }}</p>
-                                    </div>
-                                    <div class="w-full h-px bg-[var(--border)]"></div>
-                                    <div>
-                                        <h4
-                                            class="font-bold text-[var(--text)] mb-2 text-sm uppercase flex items-center gap-2">
-                                            <i class="fas fa-check-circle text-green-500"></i> Local Result
-                                        </h4>
-                                        <p class="text-sm text-[var(--text-muted)]">{{ project.result || 'Delivered
-                                            high-performance architecture.' }}</p>
-                                    </div>
-                                </div>
-
-                                <div class="flex flex-wrap gap-2">
-                                    <span *ngFor="let t of project.topics"
-                                        class="px-4 py-2 rounded-full text-sm font-bold bg-[var(--bg-elevated)] text-[var(--text)] border border-[var(--border)]">
-                                        {{ t }}
-                                    </span>
-                                </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span *ngFor="let t of project.topics"
+                                    class="px-4 py-2 rounded-full text-sm font-bold bg-[var(--bg-elevated)] text-[var(--text)] border border-[var(--border)]">
+                                    {{ t }}
+                                </span>
                             </div>
-                        </article>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Carousel Indicators -->
-            <div class="flex justify-center gap-3 mt-12">
-                <button *ngFor="let p of projects; let i = index" (click)="setProject(i)"
-                    class="h-2 rounded-full transition-all duration-300" [class.w-12]="i === currentProjectIndex()"
-                    [class.bg-[var(--accent)]]="i === currentProjectIndex()" [class.w-2]="i !== currentProjectIndex()"
-                    [class.bg-[var(--border)]]="i !== currentProjectIndex()">
-                </button>
-            </div>
+                        </div>
+                    </article>
+                </swiper-slide>
+            </swiper-container>
         </div>
     </div>
 </section>

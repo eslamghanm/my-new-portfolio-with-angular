@@ -34,7 +34,16 @@ export class ThemeService {
     private applyTheme(isDark: boolean) {
         if (isPlatformBrowser(this.platformId)) {
             const theme = isDark ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', theme);
+            const root = document.documentElement;
+
+            root.setAttribute('data-theme', theme);
+
+            if (isDark) {
+                root.classList.add('dark');
+            } else {
+                root.classList.remove('dark');
+            }
+
             localStorage.setItem('theme', theme);
         }
     }

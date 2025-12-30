@@ -9,7 +9,12 @@
   - Well-commented so you can edit easily
 */
 
-/* Enhanced Theme variablcontact page k default) */
+/* Enhanced Theme Variables (Dark default) */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 110px;
+}
+
 :root,
 [data-theme="dark"] {
   /* Emerald Gradient Palette */
@@ -55,7 +60,6 @@
 
 /* Enhanced Light mode theme */
 [data-theme="light"] {
-  /* Enhanced Emerald Gradient Palette */
   --accent: #059669;
   --accent-strong: #047857;
   --accent-light: #10b981;
@@ -64,34 +68,42 @@
   --accent-rgb-light: 16, 185, 129;
   --accent-rgb-lighter: 52, 211, 153;
 
-  /* Enhanced Text Colors for Better Contrast */
   --text: #0f172a;
-  --text-muted: #475569;
+  --text-muted: #64748b;
   --text-secondary: #334155;
-  --text-accent: #047857;
+  --text-accent: #059669;
 
-  /* Enhanced Background System with Subtle Gradients */
-  --bg-main: #f8fafc;
-  --bg-main-rgb: 248, 250, 252;
+  --bg-main: #fcfcfd;
+  --bg-main-rgb: 252, 252, 253;
   --bg-elevated: #ffffff;
   --bg-elevated-rgb: 255, 255, 255;
   --bg-surface: #f1f5f9;
-  --bg-gradient-primary: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+  --bg-gradient-primary: linear-gradient(135deg, #fcfcfd 0%, #f1f5f9 100%);
   --bg-gradient-accent: linear-gradient(135deg, rgba(5, 150, 105, 0.08) 0%, rgba(16, 185, 129, 0.04) 50%, rgba(52, 211, 153, 0.02) 100%);
 
   /* Enhanced Borders and Effects */
   --border: #e2e8f0;
-  --border-accent: rgba(5, 150, 105, 0.3);
+  --border-accent: rgba(5, 150, 105, 0.2);
   --surface-hover: #f1f5f9;
-  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-bg: rgba(255, 255, 255, 0.9);
 
   /* Enhanced Shadows with Emerald Glow */
-  --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   --glow-accent: 0 0 40px rgba(5, 150, 105, 0.2);
   --glow-accent-strong: 0 0 60px rgba(5, 150, 105, 0.3);
 
   /* Layout Variables */
   --section-py: 7rem;
+}
+
+body {
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.section,
+.hero,
+nav {
+  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
 }
 
 /* Progress Bar */
@@ -604,12 +616,18 @@
   display: flex !important;
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+  z-index: 999 !important;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .scroll-to-top.visible {
-  visibility: visible;
-  opacity: 1;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.scroll-to-top:hover {
+  transform: translateY(-5px) scale(1.1);
 }
 
 @media (max-width: 768px) {
@@ -2519,35 +2537,99 @@ article,
     filter: none !important;
   }
 }
+
 /* Click Ripple Effect */
 .click-ripple {
-    position: fixed;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    background: rgba(var(--accent-rgb), 0.4);
-    animation: ripple-anim 0.6s linear forwards;
-    z-index: 9999;
+  position: fixed;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background: rgba(var(--accent-rgb), 0.4);
+  animation: ripple-anim 0.6s linear forwards;
+  z-index: 9999;
 }
 
 @keyframes ripple-anim {
-    0% {
-        width: 0;
-        height: 0;
-        opacity: 0.8;
-    }
-    100% {
-        width: 200px;
-        height: 200px;
-        opacity: 0;
-    }
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0.8;
+  }
+
+  100% {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+  }
 }
 
 @keyframes scaleIn {
-    from { transform: scale(0); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .animate-scaleIn {
-    animation: scaleIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation: scaleIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* --- Swiper Premium Styles --- */
+swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--accent) !important;
+  width: 24px !important;
+  border-radius: 4px !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--accent) !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  padding: 30px;
+  border-radius: 50% !important;
+  transition: all 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: var(--accent);
+  color: white !important;
+}
+
+/* Typing Effect Cursor */
+.typing-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background-color: var(--accent);
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }

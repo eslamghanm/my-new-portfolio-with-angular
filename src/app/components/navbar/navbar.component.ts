@@ -1,4 +1,4 @@
-import { Component, inject, HostListener, PLATFORM_ID, signal } from '@angular/core';
+import { Component, inject, HostListener, PLATFORM_ID, signal, computed } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ThemeService } from '../../services/theme.service';
 
@@ -12,6 +12,8 @@ import { ThemeService } from '../../services/theme.service';
 export class NavbarComponent {
     private platformId = inject(PLATFORM_ID);
     themeService = inject(ThemeService);
+
+    isDark = computed(() => this.themeService.isDarkMode());
 
     isMenuOpen = false;
     isScrolled = false;

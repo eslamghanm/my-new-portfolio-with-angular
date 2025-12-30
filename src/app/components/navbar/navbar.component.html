@@ -7,7 +7,7 @@
         [class.border-[var(--accent)]/20]="isScrolled">
     </div>
 
-    <nav class="mx-auto max-w-[1400px] w-[95%] rounded-full flex items-center justify-between gap-6 px-8 py-4 relative transition-all duration-500 border border-white/10 shadow-2xl backdrop-blur-md"
+    <nav class="mx-auto max-w-[1400px] w-[95%] rounded-full flex items-center justify-between gap-6 px-8 py-4 relative transition-all duration-500 border border-[var(--border)] shadow-2xl backdrop-blur-md"
         [class.bg-[var(--bg-elevated)]/60]="!isScrolled" [class.mt-4]="!isScrolled" [class.mt-0]="isScrolled"
         [class.rounded-none]="isScrolled" [class.w-full]="isScrolled" [class.max-w-none]="isScrolled"
         [class.px-[5%]]="isScrolled" [class.py-4]="isScrolled" [class.border-none]="isScrolled"
@@ -38,7 +38,7 @@
                         class="cursor-pointer transition-all duration-300 flex items-center gap-2 px-6 py-3 rounded-full relative overflow-hidden group"
                         [class.text-white]="activeSection() === 'about'"
                         [class.text-[var(--text-muted)]]="activeSection() !== 'about'"
-                        [class.hover:text-[var(--text)]]="activeSection() !== 'about'">
+                        [class.hover:text-[var(--accent)]]="activeSection() !== 'about'">
 
                         <!-- Active Pill Background -->
                         <div class="absolute inset-0 bg-[var(--accent)] transition-all duration-300 origin-center"
@@ -60,7 +60,7 @@
                         class="cursor-pointer transition-all duration-300 flex items-center gap-2 px-6 py-3 rounded-full relative overflow-hidden group"
                         [class.text-white]="activeSection() === 'skills'"
                         [class.text-[var(--text-muted)]]="activeSection() !== 'skills'"
-                        [class.hover:text-[var(--text)]]="activeSection() !== 'skills'">
+                        [class.hover:text-[var(--accent)]]="activeSection() !== 'skills'">
 
                         <div class="absolute inset-0 bg-[var(--accent)] transition-all duration-300 origin-center"
                             [class.opacity-100]="activeSection() === 'skills'"
@@ -81,7 +81,7 @@
                         class="cursor-pointer transition-all duration-300 flex items-center gap-2 px-6 py-3 rounded-full relative overflow-hidden group"
                         [class.text-white]="activeSection() === 'projects'"
                         [class.text-[var(--text-muted)]]="activeSection() !== 'projects'"
-                        [class.hover:text-[var(--text)]]="activeSection() !== 'projects'">
+                        [class.hover:text-[var(--accent)]]="activeSection() !== 'projects'">
 
                         <div class="absolute inset-0 bg-[var(--accent)] transition-all duration-300 origin-center"
                             [class.opacity-100]="activeSection() === 'projects'"
@@ -102,7 +102,7 @@
                         class="cursor-pointer transition-all duration-300 flex items-center gap-2 px-6 py-3 rounded-full relative overflow-hidden group"
                         [class.text-white]="activeSection() === 'contact'"
                         [class.text-[var(--text-muted)]]="activeSection() !== 'contact'"
-                        [class.hover:text-[var(--text)]]="activeSection() !== 'contact'">
+                        [class.hover:text-[var(--accent)]]="activeSection() !== 'contact'">
 
                         <div class="absolute inset-0 bg-[var(--accent)] transition-all duration-300 origin-center"
                             [class.opacity-100]="activeSection() === 'contact'"
@@ -124,10 +124,9 @@
                 <!-- Theme Toggle with Enhanced Colors -->
                 <button (click)="toggleTheme()"
                     class="w-11 h-11 md:w-12 md:h-12 rounded-full bg-[var(--bg-elevated)] border border-[var(--border)] flex items-center justify-center transition-all duration-300 hover:border-[var(--accent)] hover:text-[var(--accent)] transform hover:scale-110 active:scale-95 group shadow-lg"
-                    [attr.aria-label]="themeService.isDarkMode() ? 'Switch to light mode' : 'Switch to dark mode'">
+                    [attr.aria-label]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'">
                     <div class="transition-all duration-500 group-hover:rotate-[360deg] text-xl">
-                        <i *ngIf="themeService.isDarkMode()" class="fas fa-lightbulb text-yellow-400"></i>
-                        <i *ngIf="!themeService.isDarkMode()" class="fas fa-moon text-blue-500"></i>
+                        <i [class]="isDark() ? 'fas fa-sun text-yellow-400' : 'fas fa-moon text-blue-500'"></i>
                     </div>
                 </button>
 
@@ -152,7 +151,7 @@
         <!-- Animated Content Layer -->
         <ul class="flex flex-col gap-3 relative z-10">
             <li><a (click)="scrollToSection('about')"
-                    class="flex items-center gap-5 px-6 py-5 rounded-2xl transition-all duration-300 transform"
+                    class="flex items-center gap-5 px-6 py-5 rounded-2xl transition-all duration-300 transform hover:bg-[var(--accent)]/5 hover:text-[var(--accent)]"
                     [class.bg-[var(--accent)]/10]="activeSection() === 'about'"
                     [class.text-[var(--accent)]]="activeSection() === 'about'"
                     [class.text-[var(--text)]]="activeSection() !== 'about'"
@@ -163,7 +162,7 @@
                     <span class="font-bold text-lg">Profile</span>
                 </a></li>
             <li><a (click)="scrollToSection('skills')"
-                    class="flex items-center gap-5 px-6 py-5 rounded-2xl transition-all duration-300 transform"
+                    class="flex items-center gap-5 px-6 py-5 rounded-2xl transition-all duration-300 transform hover:bg-[var(--accent)]/5 hover:text-[var(--accent)]"
                     [class.bg-[var(--accent)]/10]="activeSection() === 'skills'"
                     [class.text-[var(--accent)]]="activeSection() === 'skills'"
                     [class.text-[var(--text)]]="activeSection() !== 'skills'"
@@ -174,7 +173,7 @@
                     <span class="font-bold text-lg">Expertise</span>
                 </a></li>
             <li><a (click)="scrollToSection('projects')"
-                    class="flex items-center gap-5 px-6 py-5 rounded-2xl transition-all duration-300 transform"
+                    class="flex items-center gap-5 px-6 py-5 rounded-2xl transition-all duration-300 transform hover:bg-[var(--accent)]/5 hover:text-[var(--accent)]"
                     [class.bg-[var(--accent)]/10]="activeSection() === 'projects'"
                     [class.text-[var(--accent)]]="activeSection() === 'projects'"
                     [class.text-[var(--text)]]="activeSection() !== 'projects'"
@@ -185,7 +184,7 @@
                     <span class="font-bold text-lg">Projects</span>
                 </a></li>
             <li><a (click)="scrollToSection('contact')"
-                    class="flex items-center gap-5 px-6 py-5 rounded-2xl transition-all duration-300 transform"
+                    class="flex items-center gap-5 px-6 py-5 rounded-2xl transition-all duration-300 transform hover:bg-[var(--accent)]/5 hover:text-[var(--accent)]"
                     [class.bg-[var(--accent)]/10]="activeSection() === 'contact'"
                     [class.text-[var(--accent)]]="activeSection() === 'contact'"
                     [class.text-[var(--text)]]="activeSection() !== 'contact'"

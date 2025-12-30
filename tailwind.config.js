@@ -3,20 +3,22 @@ module.exports = {
   content: [
     "./src/**/*.{html,ts}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
         sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       colors: {
-        'bg-main': '#0b1220',
-        'bg-elevated': '#0f172a',
-        'text': '#e2e8f0',
-        'text-muted': '#94a3b8',
-        'accent': '#22c55e',
-        'accent-strong': '#16a34a',
-        'border': '#1f2937',
-        'surface-hover': '#111827'
+        'bg-main': 'var(--bg-main)',
+        'bg-elevated': 'var(--bg-elevated)',
+        'bg-surface': 'var(--bg-surface)',
+        'text': 'var(--text)',
+        'text-muted': 'var(--text-muted)',
+        'accent': 'var(--accent)',
+        'accent-strong': 'var(--accent-strong)',
+        'border': 'var(--border)',
+        'surface-hover': 'var(--surface-hover)'
       }
     },
   },
