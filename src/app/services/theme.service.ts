@@ -26,7 +26,9 @@ export class ThemeService {
     }
 
     toggleTheme() {
-        this.isDarkMode.update(isDark => !isDark);
+        console.log('ThemeService: Toggling theme. Current:', this.isDarkMode());
+        this.isDarkMode.set(!this.isDarkMode());
+        console.log('ThemeService: New state:', this.isDarkMode());
     }
 
     private applyTheme(isDark: boolean) {

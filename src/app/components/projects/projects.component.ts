@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -13,63 +13,87 @@ export class ProjectsComponent implements OnInit {
   projects: any[] = [
     {
       name: 'appointment-booking-system',
-      description: 'ITI Graduation Project — Full‑stack appointment booking system (Laravel backend + Angular frontend). Features: user authentication, calendar scheduling, email notifications, admin dashboard, and REST API.',
+      description: 'Built a real-time booking engine with automated email reminders and a dynamic admin dashboard. Enabled 24/7 self-service booking, reducing phone volume by estimated 40%.',
+      challenge: 'Healthcare providers needed a way to reduce administrative overhead and missed appointments.',
+      result: 'Enabled 24/7 self-service booking, reducing phone volume by an estimated 40%.',
       html_url: 'https://github.com/eslamghanm/appointment-booking-system',
       stargazers_count: 12,
       language: 'PHP',
-      topics: ['Laravel', 'Angular', 'MySQL', 'Auth'],
+      topics: ['Laravel', 'Angular', 'MySQL', 'Tailwind', 'REST API'],
       fork: false,
-      archived: false
+      archived: false,
+      featured: true
     },
     {
       name: 'Multi-actors-E-commerce-system-',
-      description: 'Enterprise-grade multi-role platform with complex vendor dashboards and secure payments.',
+      description: 'Engineered a scalable marketplace with secure payment gateways, inventory tracking, and vendor analytics. Features Role-Based Access Control (RBAC) and real-time stock updates.',
+      challenge: 'A standard shop wasn\'t enough; needed a complex role-based system for vendors, admins, and customers.',
+      result: 'delivered a secure, multi-role platform that handles complex vendor workflows seamlessly.',
       html_url: 'https://github.com/eslamghanm/Multi-actors-E-commerce-system-',
       stargazers_count: 8,
       language: 'JavaScript',
       homepage: 'https://storm123.netlify.app/',
-      topics: ['Node.js', 'React', 'MongoDB'],
+      topics: ['Node.js', 'React', 'MongoDB', 'Stripe', 'Redux'],
       fork: false,
       archived: false
     },
     {
       name: 'ghanem-CMS',
-      description: 'Clinic management system focused on blazing-fast performance and offline synchronization.',
+      description: 'Clinic management system focused on blazing-fast performance and offline synchronization. Implements PWA standards for reliability in poor network conditions.',
+      challenge: 'Clinics needed a lightweight, offline-capable system for patient management.',
+      result: 'Created a PWA that ensures data availability 100% of the time, regardless of internet connection.',
       html_url: 'https://github.com/eslamghanm/ghanem-CMS',
       stargazers_count: 5,
       language: 'TypeScript',
       homepage: 'https://gahnem-cms.netlify.app/dashboard',
-      topics: ['Angular', 'Firebase', 'PWA'],
+      topics: ['Angular', 'Firebase', 'PWA', 'RxJS', 'Firestore'],
       fork: false,
       archived: false
     },
     {
       name: 'eventura-event-management-system',
-      description: 'Platform with multi-threaded scheduling and custom workflow orchestration.',
+      description: 'Platform with multi-threaded scheduling and custom workflow orchestration. Solved complex calendar collision problems with custom algorithms.',
+      challenge: 'Managing overlapping events with shared resources required complex validation logic.',
+      result: 'Delivered a conflict-free scheduling engine used for managing multiple concurrent events.',
       html_url: 'https://github.com/eslamghanm/eventura-event-management-system',
       stargazers_count: 10,
       language: 'JavaScript',
       homepage: 'https://eventplannersystem.netlify.app/',
-      topics: ['JavaScript', 'API', 'UI/UX'],
+      topics: ['JavaScript', 'API', 'UI/UX', 'Algorithmic Optimization'],
       fork: false,
       archived: false
     },
     {
       name: 'JobPosting',
-      description: 'A robust recruitment system with resume parsing and multi-user access control.',
+      description: 'A robust recruitment system with resume parsing and multi-user access control. Optimized database queries for fast search and filtering.',
+      challenge: 'Recruiters needed to filter through thousands of applications instantly.',
+      result: 'Optimized search queries to return filtered results in under 200ms.',
       html_url: 'https://github.com/eslamghanm/JobPosting',
       stargazers_count: 3,
       language: 'PHP',
-      topics: ['PHP', 'MySQL', 'Bootstrap'],
+      topics: ['PHP', 'MySQL', 'Bootstrap', 'Search Optimization'],
       fork: false,
       archived: false
     }
   ];
 
   loading = false;
+  currentProjectIndex = signal(0);
 
   ngOnInit() {
     console.log('ProjectsComponent: Initialized with static local data.');
+  }
+
+  nextProject() {
+    this.currentProjectIndex.update(idx => (idx + 1) % this.projects.length);
+  }
+
+  prevProject() {
+    this.currentProjectIndex.update(idx => (idx - 1 + this.projects.length) % this.projects.length);
+  }
+
+  setProject(index: number) {
+    this.currentProjectIndex.set(index);
   }
 
   getProjectImage(repoName: string): string {

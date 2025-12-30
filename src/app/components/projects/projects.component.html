@@ -25,82 +25,111 @@
             </div>
         </div>
 
-        <!-- Projects Grid -->
-        <div *ngIf="!loading" class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <article *ngFor="let project of projects; trackBy: trackByProject" tabindex="0"
-                class="project-card relative group rounded-[2.5rem] overflow-hidden bg-[var(--bg-elevated)] border border-[var(--border)] transition-all duration-700 hover:shadow-2xl hover:-translate-y-4 focus:shadow-2xl focus:-translate-y-2 reveal"
-                [style.border-color]="getProjectColor(project.language)">
-                <div class="h-80 overflow-hidden relative">
-                    <img [src]="getProjectImage(project.name)"
-                        onerror="this.onerror=null;this.src='images/final-me.jpg'" [alt]="project.name"
-                        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000" />
-                    <!-- Animated Overlay on Hover -->
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-[var(--bg-elevated)] via-[var(--bg-elevated)]/20 to-transparent opacity-0 group-hover:opacity-100 group-focus:opacity-100 focus-within:opacity-100 transition-opacity duration-500 flex items-center justify-center pointer-events-none group-hover:pointer-events-auto group-focus:pointer-events-auto focus-within:pointer-events-auto z-20">
-                        <div
-                            class="flex gap-4 transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500">
-                            <a [href]="project.html_url" target="_blank" rel="noopener noreferrer"
-                                aria-label="Open repository for {{ project.name }}"
-                                class="w-16 h-16 rounded-2xl bg-white text-black flex items-center justify-center text-2xl hover:text-white transition-colors"
-                                [style.background-color]="getProjectColor(project.language)">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a *ngIf="project.homepage" [href]="project.homepage" target="_blank"
-                                rel="noopener noreferrer" aria-label="Open demo/homepage for {{ project.name }}"
-                                class="w-16 h-16 rounded-2xl bg-white text-black flex items-center justify-center text-2xl hover:text-white transition-colors"
-                                [style.background-color]="getProjectColor(project.language)">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
+        <div *ngIf="!loading" class="relative group/carousel">
+
+            <!-- Navigation Buttons -->
+            <!-- Navigation Buttons -->
+            <button (click)="prevProject()"
+                class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-12 z-20 w-12 h-12 md:w-16 md:h-16 rounded-full bg-[var(--bg-elevated)] border border-[var(--border)] flex items-center justify-center text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition-all duration-300 shadow-xl opacity-100 lg:opacity-0 lg:group-hover/carousel:opacity-100 transform hover:scale-110">
+                <i class="fas fa-chevron-left text-xl md:text-2xl"></i>
+            </button>
+            <button (click)="nextProject()"
+                class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-12 z-20 w-12 h-12 md:w-16 md:h-16 rounded-full bg-[var(--bg-elevated)] border border-[var(--border)] flex items-center justify-center text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition-all duration-300 shadow-xl opacity-100 lg:opacity-0 lg:group-hover/carousel:opacity-100 transform hover:scale-110">
+                <i class="fas fa-chevron-right text-xl md:text-2xl"></i>
+            </button>
+
+            <!-- Carousel Track -->
+            <div class="overflow-hidden min-h-[600px] relative">
+                <div class="transition-transform duration-700 ease-in-out flex h-full"
+                    [style.transform]="'translateX(-' + (currentProjectIndex() * 100) + '%)'">
+
+                    <div *ngFor="let project of projects; let i = index; trackBy: trackByProject"
+                        class="w-full flex-shrink-0 px-4">
+
+                        <article class="grid md:grid-cols-2 gap-8 md:gap-12 items-center h-full">
+                            <!-- Project Image -->
+                            <div
+                                class="relative rounded-[2.5rem] overflow-hidden border border-[var(--border)] shadow-2xl h-[300px] md:h-[500px] group/image">
+                                <div
+                                    class="absolute inset-0 bg-black/10 group-hover/image:bg-transparent transition-colors z-10">
+                                </div>
+                                <img [src]="getProjectImage(project.name)"
+                                    class="w-full h-full object-cover transform group-hover/image:scale-110 transition-transform duration-1000"
+                                    loading="lazy" [alt]="project.name" />
+
+                                <!-- Overlay Actions -->
+                                <div
+                                    class="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 z-20 backdrop-blur-sm bg-black/40">
+                                    <a [href]="project.html_url" target="_blank"
+                                        class="w-16 h-16 bg-white text-black rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-xl">
+                                        <i class="fab fa-github text-3xl"></i>
+                                    </a>
+                                    <a *ngIf="project.homepage" [href]="project.homepage" target="_blank"
+                                        class="w-16 h-16 bg-[var(--accent)] text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-xl">
+                                        <i class="fas fa-external-link-alt text-2xl"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Project Content -->
+                            <div class="space-y-8 text-left">
+                                <div class="flex items-center gap-4">
+                                    <span class="text-6xl font-black text-[var(--border)] opacity-30 select-none">0{{ i
+                                        + 1 }}</span>
+                                    <div class="h-px flex-1 bg-[var(--border)]"></div>
+                                </div>
+
+                                <h3
+                                    class="text-4xl md:text-6xl font-black text-[var(--text)] leading-tight tracking-tight">
+                                    {{ formatProjectName(project.name) }}
+                                </h3>
+
+                                <p class="text-[var(--text-muted)] text-xl leading-relaxed">
+                                    {{ project.description }}
+                                </p>
+
+                                <!-- Challenge / Result (STAR Method) -->
+                                <div
+                                    class="grid grid-cols-1 gap-4 p-6 bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border)] relative overflow-hidden group/star hover:border-[var(--accent)] transition-colors">
+                                    <div>
+                                        <h4
+                                            class="font-bold text-[var(--text)] mb-2 text-sm uppercase flex items-center gap-2">
+                                            <i class="fas fa-mountain text-[var(--accent)]"></i> Challenge
+                                        </h4>
+                                        <p class="text-sm text-[var(--text-muted)]">{{ project.challenge || 'Building a
+                                            robust solution for complex requirements.' }}</p>
+                                    </div>
+                                    <div class="w-full h-px bg-[var(--border)]"></div>
+                                    <div>
+                                        <h4
+                                            class="font-bold text-[var(--text)] mb-2 text-sm uppercase flex items-center gap-2">
+                                            <i class="fas fa-check-circle text-green-500"></i> Local Result
+                                        </h4>
+                                        <p class="text-sm text-[var(--text-muted)]">{{ project.result || 'Delivered
+                                            high-performance architecture.' }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap gap-2">
+                                    <span *ngFor="let t of project.topics"
+                                        class="px-4 py-2 rounded-full text-sm font-bold bg-[var(--bg-elevated)] text-[var(--text)] border border-[var(--border)]">
+                                        {{ t }}
+                                    </span>
+                                </div>
+                            </div>
+                        </article>
                     </div>
                 </div>
-                <div class="p-10">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="flex items-center gap-3">
-                            <h3 class="text-3xl font-black text-[var(--text)] transition-colors"
-                                [style.color]="getProjectColor(project.language)">
-                                {{ formatProjectName(project.name) }}
-                            </h3>
+            </div>
 
-                            <span *ngIf="project.name === 'appointment-booking-system'"
-                                class="px-3 py-1 rounded-full text-xs font-bold uppercase text-[var(--bg-main)]"
-                                [style.background-color]="getProjectColor(project.language)">
-                                ITI Graduation Project
-                            </span>
-                        </div>
-                        <span class="px-4 py-1 text-xs font-black rounded-full uppercase tracking-tighter"
-                            [style.background-color]="getProjectColor(project.language) + '1A'"
-                            [style.color]="getProjectColor(project.language)">
-                            {{ getProjectType(project.language) }}
-                        </span>
-                    </div>
-                    <p class="text-[var(--text-muted)] text-lg leading-relaxed line-clamp-2">
-                        {{ project.description }}
-                    </p>
-
-                    <!-- Tech badges -->
-                    <div *ngIf="project.topics?.length" class="mt-4 flex flex-wrap gap-2">
-                        <span *ngFor="let t of project.topics"
-                            class="px-3 py-1 rounded-full text-xs bg-[var(--bg-surface)] text-[var(--text)] border border-[var(--border)]">{{
-                            t }}</span>
-                    </div>
-
-                    <div class="mt-4 flex items-center gap-4 text-sm text-[var(--text-muted)]">
-                        <span *ngIf="project.language" class="flex items-center gap-1">
-                            <i class="fas fa-code"></i>
-                            {{ project.language }}
-                        </span>
-                        <span *ngIf="project.stargazers_count > 0" class="flex items-center gap-1">
-                            <i class="fas fa-star"></i>
-                            {{ project.stargazers_count }}
-                        </span>
-
-                        <!-- Quick links -->
-                        <a *ngIf="project.homepage" [href]="project.homepage" target="_blank" rel="noopener noreferrer"
-                            class="ml-auto text-[var(--accent)] font-bold hover:underline">View Repo / Demo</a>
-                    </div>
-                </div>
-            </article>
+            <!-- Carousel Indicators -->
+            <div class="flex justify-center gap-3 mt-12">
+                <button *ngFor="let p of projects; let i = index" (click)="setProject(i)"
+                    class="h-2 rounded-full transition-all duration-300" [class.w-12]="i === currentProjectIndex()"
+                    [class.bg-[var(--accent)]]="i === currentProjectIndex()" [class.w-2]="i !== currentProjectIndex()"
+                    [class.bg-[var(--border)]]="i !== currentProjectIndex()">
+                </button>
+            </div>
         </div>
     </div>
 </section>

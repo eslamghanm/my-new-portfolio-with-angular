@@ -66,6 +66,11 @@
 <!-- We keep it always present for SSR/SEO and just hide it visually if needed, 
      but usually we want the loader to just overlay it. -->
 <div [class.opacity-0]="isLoading()" class="transition-opacity duration-500">
+  <!-- Scroll Progress Bar -->
+  <div
+    class="fixed top-0 left-0 h-1 bg-gradient-to-r from-[var(--accent)] to-[var(--accent-light)] z-[9999] transition-all duration-100"
+    [style.width.%]="scrollProgress()"></div>
+
   <app-navbar></app-navbar>
   <app-hero></app-hero>
   <main>

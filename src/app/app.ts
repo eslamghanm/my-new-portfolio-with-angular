@@ -1,4 +1,4 @@
-import { Component, signal, OnInit, AfterViewInit, PLATFORM_ID, inject } from '@angular/core';
+import { Component, signal, OnInit, AfterViewInit, PLATFORM_ID, inject, HostListener } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { timer } from 'rxjs';
@@ -62,5 +62,34 @@ export class App implements OnInit, AfterViewInit {
       clearTimeout(safetyTimer);
       this.isLoading.set(false);
     });
+  }
+
+  // Scroll Progress
+  protected readonly scrollProgress = signal(0);
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (isPlatformBrowser(this.platformId)) {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      if (height > 0) {
+        this.scrollProgress.set((winScroll / height) * 100);
+      }
+    }
+  }
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const ripple = document.createElement('div');
+    ripple.className = 'click-ripple';
+    ripple.style.left = `${event.clientX}px`;
+    ripple.style.top = `${event.clientY}px`;
+    document.body.appendChild(ripple);
+
+    // Clean up after animation
+    setTimeout(() => {
+      ripple.remove();
+    }, 600);
   }
 }

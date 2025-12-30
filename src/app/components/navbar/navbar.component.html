@@ -7,84 +7,127 @@
         [class.border-[var(--accent)]/20]="isScrolled">
     </div>
 
-    <nav class="mx-auto max-w-[1400px] w-[95%] rounded-3xl flex items-center justify-between gap-6 px-10 py-5 relative transition-all duration-500 border border-white/10 shadow-2xl"
-        [class.bg-[var(--bg-elevated)]/70]="!isScrolled" [class.backdrop-blur-md]="!isScrolled"
-        [class.mt-0]="isScrolled" [class.rounded-none]="isScrolled" [class.w-full]="isScrolled"
-        [class.max-w-none]="isScrolled" [class.px-[5%]]="isScrolled" [class.py-4]="isScrolled"
-        [class.border-none]="isScrolled" [class.shadow-none]="isScrolled">
+    <nav class="mx-auto max-w-[1400px] w-[95%] rounded-full flex items-center justify-between gap-6 px-8 py-4 relative transition-all duration-500 border border-white/10 shadow-2xl backdrop-blur-md"
+        [class.bg-[var(--bg-elevated)]/60]="!isScrolled" [class.mt-4]="!isScrolled" [class.mt-0]="isScrolled"
+        [class.rounded-none]="isScrolled" [class.w-full]="isScrolled" [class.max-w-none]="isScrolled"
+        [class.px-[5%]]="isScrolled" [class.py-4]="isScrolled" [class.border-none]="isScrolled"
+        [class.shadow-none]="isScrolled" [class.bg-[var(--bg-main)]/90]="isScrolled">
 
         <!-- Subtle Animated Shimmer -->
-        <div
-            class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer pointer-events-none">
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer pointer-events-none rounded-full"
+            [class.rounded-none]="isScrolled">
         </div>
 
-        <!-- Brand Logo - Enhanced Color -->
-        <a (click)="scrollToSection('home')"
-            class="font-black text-2xl tracking-tighter text-[var(--accent)] transition-all duration-500 transform hover:scale-110 relative z-10 group cursor-pointer flex items-center gap-1"
+        <!-- Brand Logo - Minimal & Clean -->
+        <a (click)="scrollToSection('home')" class="group cursor-pointer flex items-center gap-1 z-10"
             aria-label="Home">
-            <span class="relative">
-                E<span class="group-hover:animate-bounce inline-block text-[#f59e0b]">G</span>.
-                <div
-                    class="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-[var(--accent)] to-[#f59e0b] transition-all duration-500 group-hover:w-full rounded-full">
-                </div>
+            <span
+                class="font-black text-2xl tracking-tighter text-[var(--text)] transition-colors group-hover:text-[var(--accent)]">
+                Eslam<span
+                    class="text-[var(--accent)] text-3xl leading-none group-hover:text-[var(--text)] transition-colors">.</span>
             </span>
         </a>
 
         <div class="flex items-center gap-8">
             <!-- Navigation Links with New Icons -->
-            <ul class="hidden lg:flex items-center gap-6 list-none m-0 p-0 text-sm font-bold tracking-tight">
-                <li><a (click)="scrollToSection('about')"
-                        class="cursor-pointer transition-all duration-300 flex items-center gap-2 px-4 py-2 rounded-xl relative group"
-                        [class.text-[var(--accent)]]="activeSection() === 'about'"
-                        [class.text-[var(--text)]]="activeSection() !== 'about'">
-                        <i class="fas fa-id-card text-xs text-[#8b5cf6]" [class.animate-bounce]="activeSection() === 'about'"></i>
-                        <span>Profile</span>
-                        <div class="absolute bottom-0 left-4 right-4 h-0.5 bg-[var(--accent)] transform transition-transform duration-300"
-                            [class.scale-x-100]="activeSection() === 'about'"
-                            [class.scale-x-0]="activeSection() !== 'about'"></div>
-                    </a></li>
-                <li><a (click)="scrollToSection('skills')"
-                        class="cursor-pointer transition-all duration-300 flex items-center gap-2 px-4 py-2 rounded-xl relative group"
-                        [class.text-[var(--accent)]]="activeSection() === 'skills'"
-                        [class.text-[var(--text)]]="activeSection() !== 'skills'">
-                        <i class="fas fa-cogs text-xs text-[#ec4899]" [class.animate-bounce]="activeSection() === 'skills'"></i>
-                        <span>Expertise</span>
-                        <div class="absolute bottom-0 left-4 right-4 h-0.5 bg-[var(--accent)] transform transition-transform duration-300"
-                            [class.scale-x-100]="activeSection() === 'skills'"
-                            [class.scale-x-0]="activeSection() !== 'skills'"></div>
-                    </a></li>
-                <li><a (click)="scrollToSection('projects')"
-                        class="cursor-pointer transition-all duration-300 flex items-center gap-2 px-4 py-2 rounded-xl relative group"
-                        [class.text-[var(--accent)]]="activeSection() === 'projects'"
-                        [class.text-[var(--text)]]="activeSection() !== 'projects'">
-                        <i class="fas fa-briefcase text-xs text-[#06b6d4]"
-                            [class.animate-bounce]="activeSection() === 'projects'"></i>
-                        <span>Projects</span>
-                        <div class="absolute bottom-0 left-4 right-4 h-0.5 bg-[var(--accent)] transform transition-transform duration-300"
-                            [class.scale-x-100]="activeSection() === 'projects'"
-                            [class.scale-x-0]="activeSection() !== 'projects'"></div>
-                    </a></li>
-                <li><a (click)="scrollToSection('contact')"
-                        class="cursor-pointer transition-all duration-300 flex items-center gap-2 px-4 py-2 rounded-xl relative group"
-                        [class.text-[var(--accent)]]="activeSection() === 'contact'"
-                        [class.text-[var(--text)]]="activeSection() !== 'contact'">
-                        <i class="fas fa-paper-plane text-xs text-[#f59e0b]" [class.animate-bounce]="activeSection() === 'contact'"></i>
-                        <span>Contact</span>
-                        <div class="absolute bottom-0 left-4 right-4 h-0.5 bg-[var(--accent)] transform transition-transform duration-300"
-                            [class.scale-x-100]="activeSection() === 'contact'"
-                            [class.scale-x-0]="activeSection() !== 'contact'"></div>
-                    </a></li>
+            <ul
+                class="hidden lg:flex items-center gap-2 list-none m-0 p-0 text-sm font-medium tracking-wide bg-[var(--bg-main)]/50 p-1 rounded-full border border-[var(--border)] backdrop-blur-sm">
+
+                <li>
+                    <a (click)="scrollToSection('about')"
+                        class="cursor-pointer transition-all duration-300 flex items-center gap-2 px-6 py-3 rounded-full relative overflow-hidden group"
+                        [class.text-white]="activeSection() === 'about'"
+                        [class.text-[var(--text-muted)]]="activeSection() !== 'about'"
+                        [class.hover:text-[var(--text)]]="activeSection() !== 'about'">
+
+                        <!-- Active Pill Background -->
+                        <div class="absolute inset-0 bg-[var(--accent)] transition-all duration-300 origin-center"
+                            [class.opacity-100]="activeSection() === 'about'"
+                            [class.opacity-0]="activeSection() !== 'about'"
+                            [class.scale-100]="activeSection() === 'about'"
+                            [class.scale-90]="activeSection() !== 'about'"></div>
+
+                        <span class="relative z-10 flex items-center gap-2">
+                            <span>Profile</span>
+                            <i *ngIf="activeSection() === 'about'"
+                                class="fas fa-check-circle text-xs animate-scaleIn"></i>
+                        </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a (click)="scrollToSection('skills')"
+                        class="cursor-pointer transition-all duration-300 flex items-center gap-2 px-6 py-3 rounded-full relative overflow-hidden group"
+                        [class.text-white]="activeSection() === 'skills'"
+                        [class.text-[var(--text-muted)]]="activeSection() !== 'skills'"
+                        [class.hover:text-[var(--text)]]="activeSection() !== 'skills'">
+
+                        <div class="absolute inset-0 bg-[var(--accent)] transition-all duration-300 origin-center"
+                            [class.opacity-100]="activeSection() === 'skills'"
+                            [class.opacity-0]="activeSection() !== 'skills'"
+                            [class.scale-100]="activeSection() === 'skills'"
+                            [class.scale-90]="activeSection() !== 'skills'"></div>
+
+                        <span class="relative z-10 flex items-center gap-2">
+                            <span>Expertise</span>
+                            <i *ngIf="activeSection() === 'skills'"
+                                class="fas fa-check-circle text-xs animate-scaleIn"></i>
+                        </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a (click)="scrollToSection('projects')"
+                        class="cursor-pointer transition-all duration-300 flex items-center gap-2 px-6 py-3 rounded-full relative overflow-hidden group"
+                        [class.text-white]="activeSection() === 'projects'"
+                        [class.text-[var(--text-muted)]]="activeSection() !== 'projects'"
+                        [class.hover:text-[var(--text)]]="activeSection() !== 'projects'">
+
+                        <div class="absolute inset-0 bg-[var(--accent)] transition-all duration-300 origin-center"
+                            [class.opacity-100]="activeSection() === 'projects'"
+                            [class.opacity-0]="activeSection() !== 'projects'"
+                            [class.scale-100]="activeSection() === 'projects'"
+                            [class.scale-90]="activeSection() !== 'projects'"></div>
+
+                        <span class="relative z-10 flex items-center gap-2">
+                            <span>Projects</span>
+                            <i *ngIf="activeSection() === 'projects'"
+                                class="fas fa-check-circle text-xs animate-scaleIn"></i>
+                        </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a (click)="scrollToSection('contact')"
+                        class="cursor-pointer transition-all duration-300 flex items-center gap-2 px-6 py-3 rounded-full relative overflow-hidden group"
+                        [class.text-white]="activeSection() === 'contact'"
+                        [class.text-[var(--text-muted)]]="activeSection() !== 'contact'"
+                        [class.hover:text-[var(--text)]]="activeSection() !== 'contact'">
+
+                        <div class="absolute inset-0 bg-[var(--accent)] transition-all duration-300 origin-center"
+                            [class.opacity-100]="activeSection() === 'contact'"
+                            [class.opacity-0]="activeSection() !== 'contact'"
+                            [class.scale-100]="activeSection() === 'contact'"
+                            [class.scale-90]="activeSection() !== 'contact'"></div>
+
+                        <span class="relative z-10 flex items-center gap-2">
+                            <span>Contact</span>
+                            <i *ngIf="activeSection() === 'contact'"
+                                class="fas fa-check-circle text-xs animate-scaleIn"></i>
+                        </span>
+                    </a>
+                </li>
             </ul>
 
             <!-- Action Buttons -->
             <div class="flex items-center gap-4">
                 <!-- Theme Toggle with Enhanced Colors -->
                 <button (click)="toggleTheme()"
-                    class="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-[var(--bg-elevated)] border border-[var(--border)] flex items-center justify-center transition-all duration-300 hover:border-[#f59e0b] hover:text-[#f59e0b] transform hover:scale-110 active:scale-95 group shadow-lg"
+                    class="w-11 h-11 md:w-12 md:h-12 rounded-full bg-[var(--bg-elevated)] border border-[var(--border)] flex items-center justify-center transition-all duration-300 hover:border-[var(--accent)] hover:text-[var(--accent)] transform hover:scale-110 active:scale-95 group shadow-lg"
                     [attr.aria-label]="themeService.isDarkMode() ? 'Switch to light mode' : 'Switch to dark mode'">
                     <div class="transition-all duration-500 group-hover:rotate-[360deg] text-xl">
-                        <i *ngIf="themeService.isDarkMode()" class="fas fa-sun text-[#fbbf24]"></i>
-                        <i *ngIf="!themeService.isDarkMode()" class="fas fa-moon text-[#6366f1]"></i>
+                        <i *ngIf="themeService.isDarkMode()" class="fas fa-lightbulb text-yellow-400"></i>
+                        <i *ngIf="!themeService.isDarkMode()" class="fas fa-moon text-blue-500"></i>
                     </div>
                 </button>
 

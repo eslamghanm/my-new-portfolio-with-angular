@@ -4,7 +4,8 @@
             <!-- Contact Info Section -->
             <div class="reveal flex flex-col justify-center">
                 <h2 class="text-6xl font-black mb-10 tracking-tighter text-[var(--text)]">
-                    Let's <span class="text-[var(--accent)]">Connect</span>
+                    Let's <span
+                        class="bg-gradient-to-r from-[var(--accent)] to-blue-500 bg-clip-text text-transparent">Connect</span>
                 </h2>
 
                 <p class="text-xl text-[var(--text-muted)] leading-relaxed mb-12 max-w-lg">
@@ -191,34 +192,31 @@
     </div>
 
     <!-- Success/Error Popup Modal -->
-    <div *ngIf="showPopup" 
-         class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black bg-opacity-50"
-         (click)="closePopup()">
+    <div *ngIf="showPopup" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black bg-opacity-50"
+        (click)="closePopup()">
         <div class="bg-[var(--bg-main)] border border-[var(--border)] rounded-2xl p-8 max-w-md w-full shadow-2xl transform transition-all duration-300"
-             (click)="$event.stopPropagation()">
+            (click)="$event.stopPropagation()">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-2xl font-bold text-[var(--text)]">
                     {{ popupType === 'success' ? 'Success!' : 'Error!' }}
                 </h3>
-                <button (click)="closePopup()" 
-                        class="w-8 h-8 rounded-full bg-[var(--bg-elevated)] hover:bg-[var(--border)] flex items-center justify-center transition-colors">
+                <button (click)="closePopup()"
+                    class="w-8 h-8 rounded-full bg-[var(--bg-elevated)] hover:bg-[var(--border)] flex items-center justify-center transition-colors">
                     <i class="fas fa-times text-[var(--text-muted)]"></i>
                 </button>
             </div>
-            
+
             <div class="flex items-center gap-4 mb-6">
                 <div class="w-12 h-12 rounded-full flex items-center justify-center"
-                     [class.bg-green-500]="popupType === 'success'"
-                     [class.bg-red-500]="popupType === 'error'">
-                    <i class="fas text-white" 
-                       [class.fa-check]="popupType === 'success'"
-                       [class.fa-exclamation]="popupType === 'error'"></i>
+                    [class.bg-green-500]="popupType === 'success'" [class.bg-red-500]="popupType === 'error'">
+                    <i class="fas text-white" [class.fa-check]="popupType === 'success'"
+                        [class.fa-exclamation]="popupType === 'error'"></i>
                 </div>
                 <p class="text-[var(--text)]">{{ popupMessage }}</p>
             </div>
-            
+
             <button (click)="closePopup()"
-                    class="w-full bg-[var(--accent)] text-[var(--bg-main)] font-bold py-3 rounded-xl hover:opacity-90 transition-opacity">
+                class="w-full bg-[var(--accent)] text-[var(--bg-main)] font-bold py-3 rounded-xl hover:opacity-90 transition-opacity">
                 Got it!
             </button>
         </div>

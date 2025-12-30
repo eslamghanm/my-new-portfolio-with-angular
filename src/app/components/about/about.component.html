@@ -8,11 +8,9 @@
                 </div>
                 <div
                     class="relative bg-[var(--bg-elevated)] p-4 rounded-3xl border border-[var(--border)] shadow-2xl overflow-hidden transform group-hover:-translate-y-2 transition-transform duration-500">
-                    <img *ngIf="themeService.isDarkMode()" class="w-full h-auto rounded-2xl object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                        src="images/final-me.jpg" alt="Eslam Ghanem" loading="lazy" />
-
-                    <img *ngIf="!themeService.isDarkMode()" class="w-full h-auto rounded-2xl object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                        src="images/islam.jpg" alt="Eslam Ghanem" loading="lazy" />
+                    <img [src]="themeService.isDarkMode() ? 'images/final-me.jpg' : 'images/islam.jpg'"
+                        class="w-full h-auto rounded-2xl object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                        alt="Eslam Ghanem" loading="lazy" />
 
                     <div
                         class="absolute bottom-10 left-10 right-10 p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 transform translate-y-20 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
@@ -36,17 +34,17 @@
 
                 <div class="space-y-6 text-xl text-[var(--text-muted)] leading-relaxed mb-12">
                     <p>
-                        I am a <span class="text-[var(--text)] font-semibold">Full-Stack Architect</span> with a relentless focus on clean code and pixel-perfect execution. With a root in PHP/Laravel and a passion for Angular, I cross the bridge between robust backend architecture and fluid frontend experiences.
+                        <span class="text-[var(--text)] font-semibold">More than just code.</span> I bridge the gap
+                        between robust engineering and intuitive design. With a rigorous foundation from the <span
+                            class="text-[var(--text)] font-bold">Information Technology Institute (ITI)</span> and a
+                        track record of delivering enterprise-grade solutions, I specialize in building systems that are
+                        not only functional but <span class="text-[var(--accent)]">resilient and delightful to
+                            use.</span>
                     </p>
-                    <div class="pl-6 border-l-4 border-[var(--accent)] italic">
+                    <div class="pl-6 border-l-4 border-[var(--accent)] italic bg-[var(--bg-elevated)] p-4 rounded-r-xl">
                         "Turning complex business logic into intuitive user interactions is not just my job—it's my
                         craft."
                     </div>
-                    <p>
-                        Graduate of <span class="text-[var(--text)]">Helwan University</span> and an <span
-                            class="text-[var(--text)]">ITI Alumni</span>, my journey is defined by rigorous training and
-                        real-world implementation at top-tier institutions.
-                    </p>
                 </div>
 
                 <!-- Metrics Grid -->

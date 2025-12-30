@@ -33,6 +33,15 @@ import { isPlatformBrowser, CommonModule } from '@angular/common';
       animation: fadeIn 0.26s ease-in-out;
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+    }
+
+    .scroll-to-top.visible {
+       visibility: visible !important;
+       opacity: 1 !important;
+       pointer-events: auto;
     }
 
     @keyframes fadeIn {
