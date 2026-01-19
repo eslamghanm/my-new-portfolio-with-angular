@@ -240,10 +240,7 @@ nav {
   overflow: hidden;
 }
 
-.nav-link-desktop:hover {
-  background: var(--accent) !important;
-  color: white !important;
-}
+
 
 .nav-link::before {
   content: '';
@@ -589,7 +586,8 @@ nav {
 .liquid-menu .mobile-nav-link:hover,
 .liquid-menu .mobile-nav-link:focus {
   background: white !important;
-  color: #22c55e !important; /* green-600 */
+  color: #22c55e !important;
+  /* green-600 */
   transform: scale(1.02) !important;
   box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2) !important;
 }
@@ -2585,9 +2583,12 @@ swiper-container {
 }
 
 @keyframes blink {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0;
   }

@@ -47,10 +47,10 @@
                             [class.scale-90]="activeSection() !== 'about'"></div>
 
                         <!-- Hover Background -->
-                        <div class="absolute inset-0 bg-[var(--accent)] transition-all duration-300 origin-center rounded-full opacity-0 group-hover:opacity-100"
+                        <div class="absolute inset-0 bg-[var(--accent)]/10 transition-all duration-300 origin-center rounded-full opacity-0 group-hover:opacity-100"
                             [class.opacity-0]="activeSection() === 'about'"></div>
 
-                        <span class="relative z-10 transition-colors group-hover:text-white">
+                        <span class="relative z-10 transition-colors group-hover:text-[var(--accent)]">
                             Profile
                         </span>
                     </a>
@@ -69,10 +69,10 @@
                             [class.scale-90]="activeSection() !== 'skills'"></div>
 
                         <!-- Hover Background -->
-                        <div class="absolute inset-0 bg-[var(--accent)] transition-all duration-300 origin-center rounded-full opacity-0 group-hover:opacity-100"
+                        <div class="absolute inset-0 bg-[var(--accent)]/10 transition-all duration-300 origin-center rounded-full opacity-0 group-hover:opacity-100"
                             [class.opacity-0]="activeSection() === 'skills'"></div>
 
-                        <span class="relative z-10 transition-colors group-hover:text-white">
+                        <span class="relative z-10 transition-colors group-hover:text-[var(--accent)]">
                             Expertise
                         </span>
                     </a>
@@ -91,10 +91,10 @@
                             [class.scale-90]="activeSection() !== 'projects'"></div>
 
                         <!-- Hover Background -->
-                        <div class="absolute inset-0 bg-[var(--accent)] transition-all duration-300 origin-center rounded-full opacity-0 group-hover:opacity-100"
+                        <div class="absolute inset-0 bg-[var(--accent)]/10 transition-all duration-300 origin-center rounded-full opacity-0 group-hover:opacity-100"
                             [class.opacity-0]="activeSection() === 'projects'"></div>
 
-                        <span class="relative z-10 transition-colors group-hover:text-white">
+                        <span class="relative z-10 transition-colors group-hover:text-[var(--accent)]">
                             Projects
                         </span>
                     </a>
@@ -113,10 +113,10 @@
                             [class.scale-90]="activeSection() !== 'contact'"></div>
 
                         <!-- Hover Background -->
-                        <div class="absolute inset-0 bg-[var(--accent)] transition-all duration-300 origin-center rounded-full opacity-0 group-hover:opacity-100"
+                        <div class="absolute inset-0 bg-[var(--accent)]/10 transition-all duration-300 origin-center rounded-full opacity-0 group-hover:opacity-100"
                             [class.opacity-0]="activeSection() === 'contact'"></div>
 
-                        <span class="relative z-10 transition-colors group-hover:text-white">
+                        <span class="relative z-10 transition-colors group-hover:text-[var(--accent)]">
                             Contact
                         </span>
                     </a>
@@ -135,12 +135,9 @@
                 </button>
 
                 <!-- Mobile Toggle -->
-                <button
-                    type="button"
+                <button type="button"
                     class="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-[#f59e0b] text-white flex items-center justify-center transition-all duration-300 transform hover:scale-110 active:scale-95 shadow-lg lg:hidden relative z-[200] cursor-pointer"
-                    aria-label="Toggle navigation" 
-                    (click)="toggleMenu()"
-                    [attr.aria-expanded]="isMenuOpen">
+                    aria-label="Toggle navigation" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen">
                     <div class="tricky-burger relative pointer-events-none" [class.open]="isMenuOpen">
                         <span></span>
                         <span></span>
@@ -152,23 +149,21 @@
     </nav>
 
     <!-- Mobile Menu Backdrop -->
-    <div *ngIf="isMenuOpen" 
-         class="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-[140] transition-opacity duration-300"
-         (click)="closeMenu()">
+    <div *ngIf="isMenuOpen"
+        class="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-[140] transition-opacity duration-300"
+        (click)="closeMenu()">
     </div>
 
     <!-- Mobile Dropdown with Enhanced Colors -->
     <div class="lg:hidden fixed top-[5.5rem] left-[2.5%] w-[95%] rounded-[2.5rem] border border-[var(--border)] p-8 liquid-menu z-[150] bg-[var(--bg-elevated)]"
-        [class.expand]="isMenuOpen"
-        *ngIf="isMenuOpen">
+        [class.expand]="isMenuOpen" *ngIf="isMenuOpen">
 
         <!-- Animated Content Layer -->
         <ul class="flex flex-col gap-3 relative z-10">
             <li>
                 <a (click)="scrollToSection('about')"
                     class="mobile-nav-link block px-6 py-5 rounded-2xl transition-all duration-300 transform cursor-pointer"
-                    [class.bg-white]="activeSection() === 'about'"
-                    [class.text-green-600]="activeSection() === 'about'"
+                    [class.bg-white]="activeSection() === 'about'" [class.text-green-600]="activeSection() === 'about'"
                     [class.text-[var(--text)]]="activeSection() !== 'about'">
                     <span class="font-bold text-lg">Profile</span>
                 </a>
