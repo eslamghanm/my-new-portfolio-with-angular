@@ -24,7 +24,11 @@ export class HeroComponent implements OnInit, OnDestroy {
     private rotationTimer: any;
 
     // Computed signals for images
-    heroImage = computed(() => this.themeService.isDarkMode() ? '/images/final-me.jpg' : '/images/islam.jpg');
+    heroImage = computed(() => {
+        const isDark = this.themeService.isDarkMode();
+        console.log('Theme changed:', isDark ? 'Dark' : 'Light', 'Image:', isDark ? '/images/eslam.jpg' : '/images/final-me.jpg');
+        return isDark ? '/images/eslam.jpg' : '/images/final-me.jpg';
+    });
 
     ngOnInit() {
         // Set initial text

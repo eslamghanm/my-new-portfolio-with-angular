@@ -1,6 +1,6 @@
 <section id="contact" class="section contact bg-[var(--bg-elevated)]" aria-label="Contact">
     <div class="container max-w-[1400px] w-[92%] mx-auto">
-        <div class="grid md:grid-cols-2 gap-24 items-stretch">
+        <div class="grid md:grid-cols-2 gap-12 items-stretch">
             <!-- Contact Info Section -->
             <div class="reveal flex flex-col justify-center">
                 <h2 class="text-6xl font-black mb-10 tracking-tighter text-[var(--text)]">
@@ -193,7 +193,8 @@
 
     <!-- Success/Error Popup Modal -->
     <div *ngIf="showPopup" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black bg-opacity-50"
-        (click)="closePopup()" role="dialog" aria-modal="true" aria-labelledby="popup-title" aria-describedby="popup-message">
+        (click)="closePopup()" role="dialog" aria-modal="true" aria-labelledby="popup-title"
+        aria-describedby="popup-message">
         <div class="bg-[var(--bg-main)] border border-[var(--border)] rounded-2xl p-8 max-w-md w-full shadow-2xl transform transition-all duration-300"
             (click)="$event.stopPropagation()">
             <div class="flex items-center justify-between mb-6">
