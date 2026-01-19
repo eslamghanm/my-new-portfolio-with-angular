@@ -82,24 +82,21 @@ export class ProjectsComponent implements OnInit {
   currentProjectIndex = signal(0);
 
   ngOnInit() {
-    console.log('ProjectsComponent: Initialized with static local data.');
+    // Component initialized with static local data
   }
 
   nextProject() {
-    console.log('ProjectsComponent: Moving to next. Current:', this.currentProjectIndex());
     this.currentProjectIndex.update(idx => (idx + 1) % this.projects.length);
-    console.log('ProjectsComponent: New index:', this.currentProjectIndex());
   }
 
   prevProject() {
-    console.log('ProjectsComponent: Moving to previous. Current:', this.currentProjectIndex());
     this.currentProjectIndex.update(idx => (idx - 1 + this.projects.length) % this.projects.length);
-    console.log('ProjectsComponent: New index:', this.currentProjectIndex());
   }
 
   setProject(index: number) {
-    console.log('ProjectsComponent: Setting index to:', index);
-    this.currentProjectIndex.set(index);
+    if (index >= 0 && index < this.projects.length) {
+      this.currentProjectIndex.set(index);
+    }
   }
 
   getProjectImage(repoName: string): string {

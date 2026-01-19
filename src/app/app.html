@@ -63,9 +63,8 @@
 </div>
 
 <!-- Portfolio Application Content -->
-<!-- We keep it always present for SSR/SEO and just hide it visually if needed, 
-     but usually we want the loader to just overlay it. -->
-<div [class.opacity-0]="isLoading()" class="transition-opacity duration-500">
+<!-- Content is always visible, loader overlays it -->
+<div [class.opacity-0]="isLoading()" [class.pointer-events-none]="isLoading()" class="transition-opacity duration-500">
   <!-- Scroll Progress Bar -->
   <div
     class="fixed top-0 left-0 h-1 bg-gradient-to-r from-[var(--accent)] to-[var(--accent-light)] z-[9999] transition-all duration-100"
@@ -73,7 +72,7 @@
 
   <app-navbar></app-navbar>
   <app-hero></app-hero>
-  <main>
+  <main class="space-y-0">
     <app-about></app-about>
     <app-skills></app-skills>
     <app-projects></app-projects>

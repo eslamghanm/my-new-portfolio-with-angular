@@ -58,31 +58,67 @@ export class ContactComponent implements OnInit {
 
         this.submitting = true;
         const formData = this.form.value;
+        const recipientEmail = 'eslamahmedghanem77@gmail.com';
 
         try {
-            const response = await fetch('https://formspree.io/f/xeeqjllk', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-
-            if (response.ok) {
-                this.showPopupMessage('success', 'Message sent successfully! I will get back to you soon.');
-                this.form.reset();
-            } else {
-                const data = await response.json();
-                if (data.errors) {
-                    const errorMessage = data.errors.map((error: any) => error.message).join(', ');
-                    this.showPopupMessage('error', errorMessage);
-                } else {
-                    this.showPopupMessage('error', 'Oops! There was a problem submitting your form.');
+            // Method 1: Use EmailJS for direct email sending (recommended)
+            // To set up EmailJS:
+            // 1. Go to https://www.emailjs.com/ and create a free account
+            // 2. Create an email service (Gmail, Outlook, etc.)
+            // 3. Create an email template
+            // 4. Get your Public Key, Service ID, and Template ID
+            // 5. Uncomment and configure the EmailJS code below
+            
+            // Uncomment this section after setting up EmailJS:
+            /*
+            const emailjs = (window as any).emailjs;
+            if (emailjs) {
+                const result = await emailjs.send(
+                    'YOUR_SERVICE_ID',      // Replace with your EmailJS Service ID
+                    'YOUR_TEMPLATE_ID',     // Replace with your EmailJS Template ID
+                    {
+                        to_email: recipientEmail,
+                        from_name: formData.name,
+                        from_email: formData.email,
+                        message: formData.message,
+                        reply_to: formData.email
+                    },
+                    'YOUR_PUBLIC_KEY'       // Replace with your EmailJS Public Key
+                );
+                
+                if (result.status === 200) {
+                    this.showPopupMessage('success', 'Message sent successfully! I will get back to you soon.');
+                    this.form.reset();
+                    return;
                 }
             }
+            */
+
+            // Method 2: Fallback - Use mailto link (opens email client)
+            const subject = encodeURIComponent(`Portfolio Contact: ${formData.name}`);
+            const body = encodeURIComponent(
+                `Name: ${formData.name}\n` +
+                `Email: ${formData.email}\n\n` +
+                `Message:\n${formData.message}`
+            );
+            const mailtoLink = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show success message
+            this.showPopupMessage('success', 
+                'Your email client should open with the message pre-filled. ' +
+                'Please click send to complete. If it doesn\'t open, use the "Copy Data" button and send manually.'
+            );
+            
+            // Reset form after a delay
+            setTimeout(() => {
+                this.form.reset();
+            }, 2000);
+
         } catch (err) {
-            this.showPopupMessage('error', 'Network connection error. Please try again later.');
+            this.showPopupMessage('error', 'Failed to open email client. Please use the "Copy Data" button and send manually.');
         } finally {
             this.submitting = false;
         }

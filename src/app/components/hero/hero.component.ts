@@ -13,68 +13,66 @@ export class HeroComponent implements OnInit, OnDestroy {
     private platformId = inject(PLATFORM_ID);
     themeService = inject(ThemeService);
 
-    // Typing effect signal
-    displayText = signal('');
-    private phrases = [
+    // Simple rotating text - no complex typing animation
+    currentPhraseIndex = signal(0);
+    phrases = [
         'I build scalable, enterprise-grade web applications.',
         'I transform complex backends into pixel-perfect frontends.',
         'I solve business problems with elegant, high-performance code.'
     ];
-    private currentPhraseIndex = 0;
-    private charIndex = 0;
-    private isDeleting = false;
-    private typingTimer: any;
+    displayText = signal('');
+    private rotationTimer: any;
 
     // Computed signals for images
     heroImage = computed(() => this.themeService.isDarkMode() ? 'images/final-me.jpg' : 'images/islam.jpg');
     secondaryImage = computed(() => this.themeService.isDarkMode() ? 'images/islam.jpg' : 'images/final-me.jpg');
 
     ngOnInit() {
+        // Set initial text
+        this.displayText.set(this.phrases[0]);
+        
         if (isPlatformBrowser(this.platformId)) {
-            // Start typing after a brief delay for the initial loader
-            setTimeout(() => this.type(), 2200);
+            // Start rotating phrases after a delay
+            setTimeout(() => {
+                this.startRotation();
+            }, 3000);
         }
     }
 
-    private type() {
-        const currentPhrase = this.phrases[this.currentPhraseIndex];
+    private startRotation() {
+        if (!isPlatformBrowser(this.platformId)) return;
 
-        if (this.isDeleting) {
-            this.displayText.set(currentPhrase.substring(0, this.charIndex - 1));
-            this.charIndex--;
-        } else {
-            this.displayText.set(currentPhrase.substring(0, this.charIndex + 1));
-            this.charIndex++;
-        }
-
-        let typeSpeed = this.isDeleting ? 30 : 60;
-
-        if (!this.isDeleting && this.charIndex === currentPhrase.length) {
-            typeSpeed = 2500; // Pause at end of phrase
-            this.isDeleting = true;
-        } else if (this.isDeleting && this.charIndex === 0) {
-            this.isDeleting = false;
-            this.currentPhraseIndex = (this.currentPhraseIndex + 1) % this.phrases.length;
-            typeSpeed = 500; // Pause before next phrase
-        }
-
-        this.typingTimer = setTimeout(() => this.type(), typeSpeed);
+        // Rotate phrases every 4 seconds
+        this.rotationTimer = setInterval(() => {
+            const nextIndex = (this.currentPhraseIndex() + 1) % this.phrases.length;
+            this.currentPhraseIndex.set(nextIndex);
+            this.displayText.set(this.phrases[nextIndex]);
+        }, 4000);
     }
 
     ngOnDestroy() {
-        if (this.typingTimer) clearTimeout(this.typingTimer);
+        if (this.rotationTimer) clearInterval(this.rotationTimer);
     }
 
     onMouseMove(event: MouseEvent) {
         if (!isPlatformBrowser(this.platformId)) return;
 
-        const moveX = (event.clientX * -20) / window.innerWidth;
-        const moveY = (event.clientY * -20) / window.innerHeight;
+        try {
+            // Respect reduced motion preference
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                return;
+            }
 
-        const blobs = document.querySelectorAll('.hero .absolute.rounded-full');
-        blobs.forEach((blob, index) => {
-            const speed = (index + 1) * 2;
-            (blob as HTMLElement).style.transform = `translate(${moveX * speed}px, ${moveY * speed}px)`;
-        });
+            const moveX = (event.clientX * -20) / window.innerWidth;
+            const moveY = (event.clientY * -20) / window.innerHeight;
+
+            const blobs = document.querySelectorAll('.hero .absolute.rounded-full');
+            blobs.forEach((blob, index) => {
+                const speed = (index + 1) * 2;
+                (blob as HTMLElement).style.transform = `translate(${moveX * speed}px, ${moveY * speed}px)`;
+            });
+        } catch (error) {
+            // Silently handle parallax errors
+        }
     }
 }

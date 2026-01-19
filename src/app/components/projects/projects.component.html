@@ -1,6 +1,6 @@
-<section id="projects" class="section projects bg-[var(--bg-main)] py-32" aria-label="Projects">
-    <div class="container max-w-[1200px] w-[92%] mx-auto">
-        <div class="text-center mb-20 reveal">
+<section id="projects" class="section projects bg-[var(--bg-main)]" aria-label="Projects">
+    <div class="container max-w-[1400px] w-[92%] mx-auto">
+        <div class="text-center mb-24 reveal">
             <h2 class="text-6xl font-black mb-6 tracking-tighter text-[var(--text)]">
                 Creative <span class="text-[var(--accent)]">Solutions</span>
             </h2>
@@ -26,9 +26,9 @@
         </div>
 
         <div *ngIf="!loading" class="swiper-wrapper-container relative overflow-hidden">
-            <swiper-container slides-per-view="1" navigation="true" pagination="true" keyboard="true" autoplay="true"
+            <swiper-container slides-per-view="1" navigation="false" pagination="true" keyboard="true" autoplay="true"
                 autoplay-delay="4000" autoplay-disable-on-interaction="false" loop="true" class="mySwiper"
-                style="--swiper-navigation-color: var(--accent); --swiper-pagination-color: var(--accent); --swiper-pagination-bullet-inactive-color: var(--border); --swiper-pagination-bullet-inactive-opacity: 0.5; --swiper-pagination-bullet-size: 10px; --swiper-navigation-size: 30px;">
+                style="--swiper-pagination-color: var(--accent); --swiper-pagination-bullet-inactive-color: var(--border); --swiper-pagination-bullet-inactive-opacity: 0.5; --swiper-pagination-bullet-size: 10px;">
 
                 <swiper-slide *ngFor="let project of projects; let i = index; trackBy: trackByProject">
                     <article class="grid md:grid-cols-2 gap-8 md:gap-12 items-center px-4 py-8 md:px-12">

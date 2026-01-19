@@ -1,15 +1,193 @@
-/* Component-specific overrides to keep section height content-driven */
+/* Marquee Skills Styles */
 .marquee-container {
-  padding: 0.75rem 0; /* reduce vertical padding so section isn't taller than content */
-  align-items: center;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    padding: 2rem 0;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 .marquee-content {
-  align-items: center;
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+    animation: marquee-scroll 40s linear infinite;
+    align-items: center;
 }
 
-/* Ensure the section itself fits to its content */
-:host {
-  display: block;
-  height: auto;
+.marquee-content:hover {
+    animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.skill-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    background: var(--bg-main);
+    border: 2px solid;
+    border-radius: 2rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text);
+    white-space: nowrap;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: fit-content;
+    gap: 0.5rem;
+}
+
+.skill-item i {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.skill-item:hover {
+    transform: translateY(-6px) scale(1.08);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    border-width: 3px;
+}
+
+.skill-item:hover i {
+    transform: scale(1.2) rotate(5deg);
+}
+
+/* Skill Category Cards */
+.skill-category-card {
+    background: var(--bg-main);
+    border: 2px solid var(--border);
+    border-radius: 2rem;
+    padding: 2rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.skill-category-card:hover::before {
+    transform: scaleX(1);
+}
+
+.skill-category-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 20px 40px rgba(var(--accent-rgb), 0.15);
+    transform: translateY(-8px);
+    background: var(--bg-elevated);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.icon-wrapper {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.skill-category-card:hover .icon-wrapper {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Frontend Card Specific */
+.frontend-card:hover {
+    border-color: #dd0031;
+    box-shadow: 0 20px 40px rgba(221, 0, 49, 0.2);
+}
+
+/* Backend Card Specific */
+.backend-card:hover {
+    border-color: #ff2d20;
+    box-shadow: 0 20px 40px rgba(255, 45, 32, 0.2);
+}
+
+/* Tools Card Specific */
+.tools-card:hover {
+    border-color: #007acc;
+    box-shadow: 0 20px 40px rgba(0, 122, 204, 0.2);
+}
+
+/* API Card Specific */
+.api-card:hover {
+    border-color: #10b981;
+    box-shadow: 0 20px 40px rgba(16, 185, 129, 0.2);
+}
+
+.skill-tag {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background: var(--bg-elevated);
+    border: 2px solid;
+    border-radius: 0.75rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.skill-tag:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .skill-category-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .marquee-content {
+        gap: 1rem;
+    }
+    
+    .skill-item {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .skill-item i {
+        font-size: 1rem;
+    }
+
+    .skill-category-card {
+        padding: 1.5rem;
+    }
+
+    .icon-wrapper {
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.25rem;
+    }
 }

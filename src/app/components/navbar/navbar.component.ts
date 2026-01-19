@@ -31,28 +31,47 @@ export class NavbarComponent {
     private updateActiveSection() {
         if (!isPlatformBrowser(this.platformId)) return;
 
-        const sections = ['home', 'about', 'skills', 'projects', 'contact'];
-        const scrollPosition = window.scrollY + 100;
+        try {
+            const sections = ['home', 'about', 'skills', 'projects', 'contact'];
+            const scrollPosition = window.scrollY + 100;
 
-        for (const section of sections) {
-            const element = document.getElementById(section);
-            if (element) {
-                const offsetTop = element.offsetTop;
-                const height = element.offsetHeight;
+            // Use requestAnimationFrame for better performance
+            requestAnimationFrame(() => {
+                for (const section of sections) {
+                    const element = document.getElementById(section);
+                    if (element) {
+                        const rect = element.getBoundingClientRect();
+                        const offsetTop = rect.top + window.scrollY;
+                        const height = rect.height;
 
-                if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
-                    this.activeSection.set(section);
+                        if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
+                            this.activeSection.set(section);
+                            break; // Exit early once we find the active section
+                        }
+                    }
                 }
-            }
+            });
+        } catch (error) {
+            // Silently handle section detection errors
         }
     }
 
     toggleMenu() {
+        if (!isPlatformBrowser(this.platformId)) return;
         this.isMenuOpen = !this.isMenuOpen;
+        
+        // Prevent body scroll when menu is open
+        if (this.isMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
     }
 
     closeMenu() {
+        if (!isPlatformBrowser(this.platformId)) return;
         this.isMenuOpen = false;
+        document.body.style.overflow = '';
     }
 
     toggleTheme() {
@@ -60,17 +79,24 @@ export class NavbarComponent {
     }
 
     scrollToSection(sectionId: string) {
+        if (!isPlatformBrowser(this.platformId)) return;
+        
         this.closeMenu();
-        const element = document.getElementById(sectionId);
-        if (element) {
-            const headerOffset = 80;
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        try {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                const headerOffset = 80;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
+                window.scrollTo({
+                    top: Math.max(0, offsetPosition),
+                    behavior: 'smooth'
+                });
+            }
+        } catch (error) {
+            // Fallback to anchor link if smooth scroll fails
+            window.location.hash = sectionId;
         }
     }
 }

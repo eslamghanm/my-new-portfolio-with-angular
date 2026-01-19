@@ -12,20 +12,20 @@
     </div>
 
     <div
-        class="container hero-grid max-w-[1200px] w-[92%] mx-auto grid md:grid-cols-2 items-center gap-12 py-12 md:py-20 relative z-10 mt-12 md:mt-0">
+        class="container hero-grid max-w-[1400px] w-[92%] mx-auto grid md:grid-cols-2 items-center gap-16 py-16 md:py-24 relative z-10 mt-12 md:mt-0">
         <div class="hero-content reveal text-center md:text-left">
             <div
                 class="inline-block px-4 py-1 mb-6 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)] border-opacity-20 text-[var(--accent)] text-sm font-bold tracking-widest uppercase">
                 <i class="fas fa-sparkles mr-2"></i> Available for hire
             </div>
 
-            <h1 class="text-3xl md:text-6xl font-black mb-6 text-[var(--text)] tracking-tighter">
-                Architecting <span class="accent-underline text-[var(--accent)]">High-Performance</span> Scalable Apps
+            <h1 class="text-3xl md:text-6xl font-black mb-6 text-[var(--text)] tracking-tighter leading-tight">
+                Architecting <span class="accent-underline text-[var(--accent)] bg-gradient-to-r from-[var(--accent)] to-blue-500 bg-clip-text text-transparent">High-Performance</span> Scalable Apps
             </h1>
 
             <h3
                 class="hero-subtitle min-h-[100px] text-xl md:text-3xl font-bold text-[var(--text-muted)] mb-6 overflow-hidden leading-relaxed">
-                {{ displayText() }}<span class="typing-cursor">_</span>
+                <span class="inline-block transition-all duration-500">{{ displayText() }}</span>
             </h3>
 
             <!-- CTAs -->
@@ -36,63 +36,84 @@
             </p>
 
             <div class="hero-cta flex gap-4 flex-wrap justify-center md:justify-start">
-                <a class="group relative px-8 py-4 rounded-2xl font-bold bg-[var(--accent)] text-[var(--bg-main)] overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl hover:shadow-[var(--accent)]/30 active:scale-95 flex items-center gap-3"
+                <a class="group relative px-8 py-4 rounded-2xl font-bold bg-gradient-to-r from-[var(--accent)] to-[var(--accent-light)] text-[var(--bg-main)] overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl hover:shadow-[var(--accent)]/50 active:scale-95 flex items-center gap-3 border-2 border-transparent hover:border-[var(--accent-light)]"
                     href="#projects" aria-label="View Case Studies">
-                    <i class="fas fa-briefcase group-hover:animate-pulse"></i>
-                    <span>View Case Studies</span>
+                    <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
+                    <i class="fas fa-briefcase relative z-10 group-hover:animate-pulse"></i>
+                    <span class="relative z-10">View Case Studies</span>
                 </a>
 
-                <a class="group border-2 border-[var(--accent)] text-[var(--accent)] px-8 py-4 rounded-2xl font-bold hover:bg-[var(--accent)] hover:text-[var(--bg-main)] transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-3 active:scale-95"
+                <a class="group relative border-2 border-[var(--accent)] text-[var(--accent)] px-8 py-4 rounded-2xl font-bold hover:bg-[var(--accent)] hover:text-[var(--bg-main)] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--accent)]/30 flex items-center gap-3 active:scale-95 overflow-hidden"
                     href="cv/Eslam%20Ahmed%20Mahmoud%20Ghanem_CV.pdf" download="Eslam-Ahmed-Ghanem-CV.pdf">
-                    <i class="fas fa-cloud-download-alt group-hover:animate-bounce"></i>
-                    <span>Grab Resume</span>
+                    <span class="absolute inset-0 bg-[var(--accent)] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                    <i class="fas fa-cloud-download-alt relative z-10 group-hover:animate-bounce"></i>
+                    <span class="relative z-10">Grab Resume</span>
                 </a>
             </div>
 
             <div
                 class="mt-12 flex items-center justify-center md:justify-start gap-6 text-[var(--text-muted)] text-2xl">
                 <a href="https://github.com/eslamghanm" target="_blank" rel="noopener noreferrer"
-                    aria-label="GitHub (opens in new tab)" class="hover:text-[var(--accent)] transition-colors"><i
-                        class="fab fa-github"></i></a>
+                    aria-label="GitHub (opens in new tab)" 
+                    class="group/social w-12 h-12 rounded-full bg-[var(--bg-elevated)] border border-[var(--border)] flex items-center justify-center hover:bg-[#333] hover:text-white hover:border-[#333] hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-xl">
+                    <i class="fab fa-github transition-transform group-hover/social:scale-125"></i>
+                </a>
                 <a href="https://linkedin.com/in/eslam-ghanem-aa404b2a3" target="_blank" rel="noopener noreferrer"
-                    aria-label="LinkedIn (opens in new tab)" class="hover:text-[var(--accent)] transition-colors"><i
-                        class="fab fa-linkedin"></i></a>
+                    aria-label="LinkedIn (opens in new tab)" 
+                    class="group/social w-12 h-12 rounded-full bg-[var(--bg-elevated)] border border-[var(--border)] flex items-center justify-center hover:bg-[#0077b5] hover:text-white hover:border-[#0077b5] hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-xl">
+                    <i class="fab fa-linkedin transition-transform group-hover/social:scale-125"></i>
+                </a>
                 <a href="https://wa.me/201280102968" target="_blank" rel="noopener noreferrer"
-                    aria-label="WhatsApp (opens in new tab)" class="hover:text-[var(--accent)] transition-colors"><i
-                        class="fab fa-whatsapp"></i></a>
+                    aria-label="WhatsApp (opens in new tab)" 
+                    class="group/social w-12 h-12 rounded-full bg-[var(--bg-elevated)] border border-[var(--border)] flex items-center justify-center hover:bg-[#25d366] hover:text-white hover:border-[#25d366] hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-xl">
+                    <i class="fab fa-whatsapp transition-transform group-hover/social:scale-125"></i>
+                </a>
             </div>
         </div>
 
         <div class="hero-media relative reveal group">
+            <!-- Enhanced gradient background -->
             <div
-                class="absolute inset-0 bg-[var(--accent)] rounded-[3rem] rotate-6 scale-105 opacity-20 group-hover:rotate-12 transition-transform duration-700">
+                class="absolute inset-0 bg-gradient-to-br from-[var(--accent)] via-purple-600 to-blue-600 rounded-[3rem] rotate-6 scale-105 opacity-20 group-hover:opacity-30 group-hover:rotate-12 transition-all duration-700 blur-xl">
             </div>
+            
+            <!-- Glowing border effect -->
             <div
-                class="relative z-10 rounded-[3rem] overflow-hidden border-8 border-[var(--bg-elevated)] shadow-2xl transform group-hover:-rotate-3 transition-transform duration-700">
-                <img *ngIf="themeService.isDarkMode()" src="images/final-me.jpg" alt="Eslam Ahmed Ghanem - Dark Mode"
-                    class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700"
+                class="absolute inset-0 rounded-[3rem] border-4 border-[var(--accent)] opacity-0 group-hover:opacity-50 transition-opacity duration-700 z-20">
+            </div>
+            
+            <!-- Main image container with enhanced styling -->
+            <div
+                class="relative z-10 rounded-[3rem] overflow-hidden border-8 border-[var(--bg-elevated)] shadow-2xl transform group-hover:-rotate-3 group-hover:scale-[1.02] transition-all duration-700 bg-gradient-to-br from-[var(--bg-elevated)] to-[var(--bg-surface)]">
+                <img [src]="heroImage()" [alt]="themeService.isDarkMode() ? 'Eslam Ahmed Ghanem - Dark Mode' : 'Eslam Ahmed Ghanem - Light Mode'"
+                    class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 brightness-95 group-hover:brightness-110" 
                     loading="eager" fetchpriority="high" />
-                <img *ngIf="!themeService.isDarkMode()" src="images/islam.jpg" alt="Eslam Ahmed Ghanem - Light Mode"
-                    class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700"
-                    loading="eager" fetchpriority="high" />
+                
+                <!-- Overlay gradient on hover -->
+                <div class="absolute inset-0 bg-gradient-to-t from-[var(--accent)]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
             </div>
 
-            <!-- Small secondary portrait (Swaps inversely) -->
-            <div class="absolute -top-6 -right-6 z-30 pointer-events-none transition-all duration-500">
+            <!-- Small secondary portrait (Swaps inversely) with enhanced styling -->
+            <div class="absolute -top-6 -right-6 z-30 pointer-events-none transition-all duration-500 group-hover:scale-110 group-hover:rotate-12">
                 <div
-                    class="bg-[var(--bg-elevated)] p-1 rounded-full border border-[var(--border)] shadow-lg overflow-hidden w-16 h-16 md:w-20 md:h-20">
-                    <img *ngIf="themeService.isDarkMode()" src="images/islam.jpg" alt="Secondary - Light"
-                        class="w-full h-full object-cover rounded-full" loading="lazy" />
-                    <img *ngIf="!themeService.isDarkMode()" src="images/final-me.jpg" alt="Secondary - Dark"
+                    class="bg-gradient-to-br from-[var(--bg-elevated)] to-[var(--bg-surface)] p-1 rounded-full border-2 border-[var(--accent)] shadow-2xl overflow-hidden w-16 h-16 md:w-20 md:h-20 ring-4 ring-[var(--accent)]/20">
+                    <img [src]="secondaryImage()" [alt]="themeService.isDarkMode() ? 'Secondary - Light' : 'Secondary - Dark'"
                         class="w-full h-full object-cover rounded-full" loading="lazy" />
                 </div>
             </div>
 
-            <!-- Floating Badges -->
+            <!-- Enhanced Floating Badges -->
             <div
-                class="absolute -bottom-6 -right-6 bg-[var(--bg-elevated)] p-6 rounded-3xl shadow-2xl border border-[var(--border)] z-20 animate-bounce">
-                <i class="fas fa-check-circle text-green-500 text-3xl"></i>
+                class="absolute -bottom-6 -right-6 bg-gradient-to-br from-[var(--bg-elevated)] to-[var(--bg-surface)] p-6 rounded-3xl shadow-2xl border-2 border-[var(--accent)] z-20 animate-bounce group-hover:border-green-500 transition-colors">
+                <div class="relative">
+                    <i class="fas fa-check-circle text-green-500 text-3xl drop-shadow-lg"></i>
+                    <div class="absolute inset-0 bg-green-500/20 rounded-full blur-xl animate-pulse"></div>
+                </div>
             </div>
+            
+            <!-- Additional decorative elements -->
+            <div class="absolute top-1/2 -left-4 w-8 h-8 bg-[var(--accent)] rounded-full opacity-20 group-hover:opacity-40 group-hover:scale-150 transition-all duration-700 blur-sm"></div>
+            <div class="absolute bottom-1/4 -left-8 w-12 h-12 bg-purple-500 rounded-full opacity-15 group-hover:opacity-30 group-hover:scale-125 transition-all duration-700 blur-md"></div>
         </div>
     </div>
 

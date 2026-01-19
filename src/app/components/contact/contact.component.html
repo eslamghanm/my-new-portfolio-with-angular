@@ -1,6 +1,6 @@
-<section id="contact" class="section contact py-32 bg-[var(--bg-elevated)]" aria-label="Contact">
-    <div class="container max-w-[1200px] w-[92%] mx-auto">
-        <div class="grid md:grid-cols-2 gap-20 items-stretch">
+<section id="contact" class="section contact bg-[var(--bg-elevated)]" aria-label="Contact">
+    <div class="container max-w-[1400px] w-[92%] mx-auto">
+        <div class="grid md:grid-cols-2 gap-24 items-stretch">
             <!-- Contact Info Section -->
             <div class="reveal flex flex-col justify-center">
                 <h2 class="text-6xl font-black mb-10 tracking-tighter text-[var(--text)]">
@@ -45,23 +45,23 @@
                 <div class="flex gap-4">
                     <a href="https://github.com/eslamghanm"
                         class="w-14 h-14 rounded-full border border-[var(--border)] flex items-center justify-center text-2xl hover:bg-[#333] hover:text-white hover:border-[#333] transition-all transform hover:-translate-y-2"
-                        target="_blank">
-                        <i class="fab fa-github"></i>
+                        target="_blank" rel="noopener noreferrer" aria-label="GitHub profile (opens in new tab)">
+                        <i class="fab fa-github" aria-hidden="true"></i>
                     </a>
                     <a href="https://linkedin.com/in/eslam-ghanem-aa404b2a3"
                         class="w-14 h-14 rounded-full border border-[var(--border)] flex items-center justify-center text-2xl hover:bg-[#0077b5] hover:text-white hover:border-[#0077b5] transition-all transform hover:-translate-y-2"
-                        target="_blank">
-                        <i class="fab fa-linkedin-in"></i>
+                        target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile (opens in new tab)">
+                        <i class="fab fa-linkedin-in" aria-hidden="true"></i>
                     </a>
                     <a href="https://wa.me/201280102968"
                         class="w-14 h-14 rounded-full border border-[var(--border)] flex items-center justify-center text-2xl hover:bg-[#25d366] hover:text-white hover:border-[#25d366] transition-all transform hover:-translate-y-2"
-                        target="_blank">
-                        <i class="fab fa-whatsapp"></i>
+                        target="_blank" rel="noopener noreferrer" aria-label="WhatsApp contact (opens in new tab)">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
                     </a>
                     <a href="https://www.facebook.com/share/17WVTrS9m4/"
                         class="w-14 h-14 rounded-full border border-[var(--border)] flex items-center justify-center text-2xl hover:bg-[#1877f2] hover:text-white hover:border-[#1877f2] transition-all transform hover:-translate-y-2"
-                        target="_blank">
-                        <i class="fab fa-facebook-f"></i>
+                        target="_blank" rel="noopener noreferrer" aria-label="Facebook profile (opens in new tab)">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
@@ -193,26 +193,27 @@
 
     <!-- Success/Error Popup Modal -->
     <div *ngIf="showPopup" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black bg-opacity-50"
-        (click)="closePopup()">
+        (click)="closePopup()" role="dialog" aria-modal="true" aria-labelledby="popup-title" aria-describedby="popup-message">
         <div class="bg-[var(--bg-main)] border border-[var(--border)] rounded-2xl p-8 max-w-md w-full shadow-2xl transform transition-all duration-300"
             (click)="$event.stopPropagation()">
             <div class="flex items-center justify-between mb-6">
-                <h3 class="text-2xl font-bold text-[var(--text)]">
+                <h3 id="popup-title" class="text-2xl font-bold text-[var(--text)]">
                     {{ popupType === 'success' ? 'Success!' : 'Error!' }}
                 </h3>
-                <button (click)="closePopup()"
+                <button (click)="closePopup()" aria-label="Close dialog"
                     class="w-8 h-8 rounded-full bg-[var(--bg-elevated)] hover:bg-[var(--border)] flex items-center justify-center transition-colors">
-                    <i class="fas fa-times text-[var(--text-muted)]"></i>
+                    <i class="fas fa-times text-[var(--text-muted)]" aria-hidden="true"></i>
                 </button>
             </div>
 
             <div class="flex items-center gap-4 mb-6">
                 <div class="w-12 h-12 rounded-full flex items-center justify-center"
-                    [class.bg-green-500]="popupType === 'success'" [class.bg-red-500]="popupType === 'error'">
+                    [class.bg-green-500]="popupType === 'success'" [class.bg-red-500]="popupType === 'error'"
+                    aria-hidden="true">
                     <i class="fas text-white" [class.fa-check]="popupType === 'success'"
                         [class.fa-exclamation]="popupType === 'error'"></i>
                 </div>
-                <p class="text-[var(--text)]">{{ popupMessage }}</p>
+                <p id="popup-message" class="text-[var(--text)]">{{ popupMessage }}</p>
             </div>
 
             <button (click)="closePopup()"

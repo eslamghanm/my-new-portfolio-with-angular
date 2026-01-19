@@ -53,9 +53,9 @@ html {
   --glow-accent-strong: 0 0 60px rgba(16, 185, 129, 0.3);
 
   /* Layout Variables */
-  --section-py: 8rem;
+  --section-py: 10rem;
   --container-max-width: 1400px;
-  --content-padding: 3rem;
+  --content-padding: 4rem;
 }
 
 /* Enhanced Light mode theme */
@@ -93,7 +93,7 @@ html {
   --glow-accent-strong: 0 0 60px rgba(5, 150, 105, 0.3);
 
   /* Layout Variables */
-  --section-py: 7rem;
+  --section-py: 8rem;
 }
 
 body {
@@ -182,7 +182,7 @@ nav {
     0 1px 3px rgba(16, 185, 129, 0.1);
 }
 
-/* Enhanced Button Styles */
+/* Enhanced Button Styles - Consolidated */
 .enhanced-btn {
   position: relative;
   overflow: hidden;
@@ -193,17 +193,20 @@ nav {
 .enhanced-btn::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.5s ease;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
   z-index: 1;
 }
 
 .enhanced-btn:hover::before {
-  left: 100%;
+  width: 300px;
+  height: 300px;
 }
 
 .enhanced-btn>* {
@@ -212,20 +215,6 @@ nav {
 }
 
 /* Shimmer Animation */
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-.animate-shimmer {
-  animation: shimmer 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-}
-
 @keyframes shimmer {
   0% {
     transform: translateX(-100%);
@@ -240,10 +229,20 @@ nav {
   }
 }
 
+.animate-shimmer {
+  animation: shimmer 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
 /* Enhanced Navigation Link Hover Effects */
-.nav-link {
+.nav-link,
+.nav-link-desktop {
   position: relative;
   overflow: hidden;
+}
+
+.nav-link-desktop:hover {
+  background: var(--accent) !important;
+  color: white !important;
 }
 
 .nav-link::before {
@@ -364,37 +363,7 @@ nav {
   filter: drop-shadow(0 5px 15px rgba(var(--accent-rgb), 0.4));
 }
 
-/* Enhanced button interactions with ripple effect */
-.enhanced-btn {
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.enhanced-btn::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
-  z-index: 1;
-}
-
-.enhanced-btn:active::before {
-  width: 300px;
-  height: 300px;
-}
-
-.enhanced-btn>* {
-  position: relative;
-  z-index: 2;
-}
+/* Enhanced button interactions consolidated above */
 
 /* Improved Mobile Menu Animation */
 .mobile-nav-open {
@@ -594,12 +563,10 @@ nav {
   clip-path: circle(0% at 90% 5%);
   opacity: 0;
   visibility: hidden;
-  transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1),
-    opacity 0.4s ease,
-    visibility 0.4s ease;
-  background: linear-gradient(135deg,
-      rgba(var(--bg-elevated-rgb), 0.98) 0%,
-      rgba(var(--accent-rgb), 0.05) 100%) !important;
+  transition: clip-path 0.5s cubic-bezier(0.77, 0, 0.175, 1),
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+  background: var(--bg-elevated) !important;
   backdrop-filter: blur(25px) saturate(200%) !important;
   box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5),
     inset 0 0 0 1px rgba(var(--accent-rgb), 0.15) !important;
@@ -609,6 +576,22 @@ nav {
   clip-path: circle(150% at 90% 5%);
   opacity: 1 !important;
   visibility: visible !important;
+}
+
+/* Mobile Nav Link Hover Styles - Override existing styles */
+.liquid-menu .mobile-nav-link {
+  background: transparent !important;
+  color: var(--text) !important;
+  position: relative;
+  overflow: visible;
+}
+
+.liquid-menu .mobile-nav-link:hover,
+.liquid-menu .mobile-nav-link:focus {
+  background: white !important;
+  color: #22c55e !important; /* green-600 */
+  transform: scale(1.02) !important;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2) !important;
 }
 
 /* Scroll To Top Visibility Fix */
@@ -661,14 +644,15 @@ nav {
   border-top: 1px solid #e2e8f0;
 }
 
-/* Reveal transition safety - DEFAULT TO VISIBLE */
+/* Reveal transition - Elements visible by default for SSR */
 .reveal {
   opacity: 1;
   transform: translateY(0);
-  transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+  visibility: visible;
+  transition: opacity 0.8s cubic-bezier(0.2, 1, 0.3, 1), transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
 }
 
-/* Only hide if JS has initialized and element isn't visible yet */
+/* Only animate if JS is ready and element hasn't been marked visible */
 .js-ready .reveal:not(.visible) {
   opacity: 0;
   transform: translateY(30px);
@@ -697,32 +681,7 @@ nav {
   animation: float-mini 2s ease-in-out infinite;
 }
 
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.marquee-container {
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  padding: 2rem 0;
-}
-
-.marquee-content {
-  display: flex;
-  width: max-content;
-  animation: marquee 30s linear infinite;
-}
-
-.marquee-content:hover {
-  animation-play-state: paused;
-}
+/* Marquee animation is now handled in skills component CSS */
 
 .glass {
   background: rgba(15, 23, 42, 0.6) !important;
@@ -741,16 +700,7 @@ nav {
 }
 
 /* ========== Advanced Animations & Keyframes ========== */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* Note: .reveal styles are defined above - this section is for additional animations */
 
 .text-shadow {
   text-shadow: 0 10px 30px rgba(var(--accent-rgb), 0.3);
@@ -864,20 +814,26 @@ a {
 
 /* Enhanced Container keeps content centered and readable */
 .container {
-  width: min(var(--container-max-width, 1200px), 92%);
+  width: min(var(--container-max-width, 1400px), 92%);
   margin: 0 auto;
-  padding: 0 var(--content-padding, 2rem);
+  padding: 0 var(--content-padding, 4rem);
+}
+
+@media (max-width: 1024px) {
+  .container {
+    --content-padding: 3rem;
+  }
 }
 
 @media (max-width: 768px) {
   .container {
-    --content-padding: 1.5rem;
+    --content-padding: 2rem;
   }
 }
 
 @media (max-width: 480px) {
   .container {
-    --content-padding: 1rem;
+    --content-padding: 1.5rem;
   }
 }
 
@@ -1573,6 +1529,14 @@ a {
   position: relative;
   overflow: hidden;
   isolation: isolate;
+}
+
+.section:first-of-type {
+  padding-top: calc(var(--section-py) + 2rem);
+}
+
+.section:last-of-type {
+  padding-bottom: calc(var(--section-py) + 2rem);
 }
 
 .section>* {
@@ -2485,26 +2449,22 @@ textarea:focus::placeholder {
   visibility: visible !important;
 }
 
-/* NUCLEAR VISIBILITY FIX - FORCE SHOW EVERYTHING */
-.reveal,
-.reveal:not(.visible),
-.js-ready .reveal:not(.visible) {
+/* Fallback visibility - ensure content is always visible */
+.reveal {
   opacity: 1 !important;
-  transform: none !important;
-  filter: none !important;
   visibility: visible !important;
-  animation: none !important;
-  transition: none !important;
 }
 
-/* Ensure key sections are specifically forced visible */
+.reveal.visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Ensure key sections are visible by default */
 section,
-article,
-.project-card,
-.skill-row {
+article {
   opacity: 1 !important;
   visibility: visible !important;
-  transform: none !important;
 }
 
 /* Typed.js Cursor Fix */
@@ -2614,21 +2574,20 @@ swiper-container {
 /* Typing Effect Cursor */
 .typing-cursor {
   display: inline-block;
-  width: 2px;
+  width: 3px;
   height: 1.2em;
   background-color: var(--accent);
   margin-left: 4px;
   vertical-align: middle;
   animation: blink 1s infinite;
+  font-weight: bold;
+  color: var(--accent);
 }
 
 @keyframes blink {
-
-  0%,
-  100% {
+  0%, 100% {
     opacity: 1;
   }
-
   50% {
     opacity: 0;
   }

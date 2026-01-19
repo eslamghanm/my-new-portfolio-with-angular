@@ -58,7 +58,7 @@ export class App implements OnInit, AfterViewInit {
 
     // Since we are now using 100% static data, we only need an aesthetic delay
     // to show our beautiful premium loader for a brief moment.
-    timer(2000).subscribe(() => {
+    timer(1500).subscribe(() => {
       clearTimeout(safetyTimer);
       this.isLoading.set(false);
     });
@@ -70,10 +70,15 @@ export class App implements OnInit, AfterViewInit {
   @HostListener('window:scroll', [])
   onWindowScroll() {
     if (isPlatformBrowser(this.platformId)) {
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      if (height > 0) {
-        this.scrollProgress.set((winScroll / height) * 100);
+      try {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        if (height > 0) {
+          const progress = Math.min(100, Math.max(0, (winScroll / height) * 100));
+          this.scrollProgress.set(progress);
+        }
+      } catch (error) {
+        // Silently handle scroll calculation errors
       }
     }
   }
@@ -81,15 +86,28 @@ export class App implements OnInit, AfterViewInit {
   onClick(event: MouseEvent) {
     if (!isPlatformBrowser(this.platformId)) return;
 
-    const ripple = document.createElement('div');
-    ripple.className = 'click-ripple';
-    ripple.style.left = `${event.clientX}px`;
-    ripple.style.top = `${event.clientY}px`;
-    document.body.appendChild(ripple);
+    try {
+      // Only add ripple effect for non-interactive elements
+      const target = event.target as HTMLElement;
+      if (target.tagName === 'BUTTON' || target.tagName === 'A' || target.closest('button, a')) {
+        return;
+      }
 
-    // Clean up after animation
-    setTimeout(() => {
-      ripple.remove();
-    }, 600);
+      const ripple = document.createElement('div');
+      ripple.className = 'click-ripple';
+      ripple.setAttribute('aria-hidden', 'true');
+      ripple.style.left = `${event.clientX}px`;
+      ripple.style.top = `${event.clientY}px`;
+      document.body.appendChild(ripple);
+
+      // Clean up after animation
+      setTimeout(() => {
+        if (ripple.parentNode) {
+          ripple.remove();
+        }
+      }, 600);
+    } catch (error) {
+      // Silently handle ripple effect errors
+    }
   }
 }
