@@ -50,23 +50,22 @@
                 </div>
 
                 <!-- Metrics Grid -->
-                <div class="grid grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div
-                        class="p-6 bg-[var(--bg-elevated)] border border-[var(--border)] rounded-2xl hover:border-[var(--accent)] transition-colors group">
+                <div class="grid grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="metric-card p-6 rounded-2xl group">
                         <i
-                            class="fas fa-graduation-cap text-3xl text-[var(--accent)] mb-4 block group-hover:animate-bounce"></i>
+                            class="fas fa-graduation-cap text-3xl text-[var(--accent)] mb-4 block group-hover:scale-110 transition-transform"></i>
                         <h4 class="text-[var(--text)] font-bold mb-1">ITI Certified</h4>
                         <p class="text-[var(--text-muted)] text-sm">Full Stack Track</p>
                     </div>
-                    <div
-                        class="p-6 bg-[var(--bg-elevated)] border border-[var(--border)] rounded-2xl hover:border-blue-500 transition-colors group">
-                        <i class="fas fa-laptop-code text-3xl text-blue-500 mb-4 block group-hover:animate-bounce"></i>
+                    <div class="metric-card p-6 rounded-2xl group">
+                        <i
+                            class="fas fa-laptop-code text-3xl text-blue-500 mb-4 block group-hover:scale-110 transition-transform"></i>
                         <h4 class="text-[var(--text)] font-bold mb-1">{{ repoCount || '—' }} Repos</h4>
-                        <p class="text-[var(--text-muted)] text-sm">GitHub Contributions (showing up to 30)</p>
+                        <p class="text-[var(--text-muted)] text-sm">GitHub Contributions</p>
                     </div>
-                    <div
-                        class="p-6 bg-[var(--bg-elevated)] border border-[var(--border)] rounded-2xl hover:border-purple-500 transition-colors group">
-                        <i class="fas fa-terminal text-3xl text-purple-500 mb-4 block group-hover:animate-bounce"></i>
+                    <div class="metric-card p-6 rounded-2xl group">
+                        <i
+                            class="fas fa-terminal text-3xl text-purple-500 mb-4 block group-hover:scale-110 transition-transform"></i>
                         <h4 class="text-[var(--text)] font-bold mb-1">Modern Tech</h4>
                         <p class="text-[var(--text-muted)] text-sm">Stack Optimization</p>
                     </div>

@@ -1,112 +1,195 @@
-<section id="skills" class="section skills bg-[var(--bg-elevated)]" aria-label="Skills">
-    <div class="container max-w-[1400px] w-[92%] mx-auto mb-20 reveal text-center">
-        <h2 class="text-5xl md:text-6xl font-black mb-6 tracking-tighter text-[var(--text)]">
-            Technical <span class="text-[var(--accent)]">Arsenal</span>
-        </h2>
-        <p class="text-[var(--text-muted)] text-lg md:text-xl max-w-xl mx-auto">
-            The languages, frameworks, and tools I use to bring digital visions to life.
-        </p>
+<section id="skills" class="section skills min-h-screen flex flex-col justify-center relative overflow-hidden py-24"
+    aria-label="Skills">
+
+    <!-- Background Decor -->
+    <div class="absolute inset-0 bg-[var(--bg-main)] -z-20"></div>
+    <div
+        class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px] -z-10 pointer-events-none">
+    </div>
+    <div
+        class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[var(--accent)]/5 rounded-full blur-[120px] -z-10 pointer-events-none">
     </div>
 
-    <!-- Marquee Skills Section -->
-    <div class="relative overflow-hidden py-8">
-        <!-- Gradient overlays for fade effect -->
-        <div class="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[var(--bg-elevated)] to-transparent z-10 pointer-events-none"></div>
-        <div class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[var(--bg-elevated)] to-transparent z-10 pointer-events-none"></div>
+    <div class="container max-w-[1400px] w-[92%] mx-auto relative z-10">
 
-        <!-- Marquee Container -->
-        <div class="marquee-container">
-            <div class="marquee-content">
-                <div *ngFor="let skill of getSkills()" class="skill-item" 
-                     [style.border-color]="skill.color"
-                     [style.background]="skill.bgColor">
-                    <i [class]="skill.icon" [style.color]="skill.color" class="mr-2 text-lg"></i>
-                    <span>{{ skill.name }}</span>
+        <!-- Header -->
+        <div class="text-center mb-20 reveal">
+            <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tight text-[var(--text)]">
+                Technical <span
+                    class="bg-gradient-to-r from-[var(--accent)] to-blue-500 bg-clip-text text-transparent">Expertise</span>
+            </h2>
+            <p class="text-[var(--text-muted)] text-xl max-w-2xl mx-auto leading-relaxed">
+                My preferred weapons of choice for building scalable, high-performance digital solutions.
+            </p>
+        </div>
+
+        <!-- 1. The Spotlight (Core Skills) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24 reveal">
+            <div *ngFor="let skill of coreSkills; trackBy: trackByName"
+                class="spotlight-card group relative p-8 rounded-[2rem] bg-[var(--bg-elevated)] border border-[var(--border)] overflow-hidden transition-all duration-500 hover:-translate-y-2">
+
+                <!-- Hover Gradient -->
+                <div
+                    class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-[var(--bg-surface)] to-transparent">
+                </div>
+
+                <!-- Content -->
+                <div class="relative z-10 flex flex-col items-center text-center gap-4">
+                    <div class="w-20 h-20 rounded-2xl flex items-center justify-center text-4xl mb-2 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-2xl"
+                        [style.background]="skill.bgColor" [style.color]="skill.color">
+                        <i [class]="skill.icon"></i>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-[var(--text)]">{{ skill.name }}</h3>
+                    <p class="text-[var(--text-muted)] text-sm font-medium leading-relaxed">{{ skill.description }}</p>
+                </div>
+
+                <!-- Decorative Border Glow on Hover -->
+                <div
+                    class="absolute inset-0 border-2 border-transparent group-hover:border-[var(--accent)]/20 rounded-[2rem] transition-colors duration-500 pointer-events-none">
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Skills Categories Grid -->
-    <div class="container max-w-[1400px] w-[92%] mx-auto mt-20 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Frontend -->
-        <div class="skill-category-card frontend-card">
-            <div class="card-header">
-                <div class="icon-wrapper" style="background: rgba(221, 0, 49, 0.1);">
-                    <i class="fas fa-laptop-code" style="color: #dd0031;"></i>
-                </div>
-                <h4 class="text-xl font-bold text-[var(--text)]">Frontend</h4>
-            </div>
-            <div class="flex flex-wrap gap-2 text-[var(--text-muted)] text-sm mt-4">
-                <span class="skill-tag" style="border-color: rgba(221, 0, 49, 0.3);">Angular</span>
-                <span class="skill-tag" style="border-color: rgba(97, 218, 251, 0.3);">React</span>
-                <span class="skill-tag" style="border-color: rgba(49, 120, 198, 0.3);">TypeScript</span>
-                <span class="skill-tag" style="border-color: rgba(247, 223, 30, 0.3);">JavaScript</span>
-                <span class="skill-tag" style="border-color: rgba(6, 182, 212, 0.3);">Tailwind CSS</span>
-                <span class="skill-tag" style="border-color: rgba(121, 82, 179, 0.3);">Bootstrap</span>
-                <span class="skill-tag" style="border-color: rgba(224, 30, 90, 0.3);">RxJS</span>
-                <span class="skill-tag" style="border-color: rgba(186, 104, 200, 0.3);">NGRX</span>
-            </div>
-        </div>
+        <!-- 2. Detailed Tech Grid (Masonry-like) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal delay-200">
 
-        <!-- Backend -->
-        <div class="skill-category-card backend-card">
-            <div class="card-header">
-                <div class="icon-wrapper" style="background: rgba(255, 45, 32, 0.1);">
-                    <i class="fas fa-server" style="color: #ff2d20;"></i>
+            <!-- Frontend Ecosystem -->
+            <div class="tech-category-card group">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="p-3 rounded-xl bg-pink-500/10 text-pink-500">
+                        <i class="fas fa-laptop-code text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-[var(--text)]">Frontend Ecosystem</h3>
                 </div>
-                <h4 class="text-xl font-bold text-[var(--text)]">Backend</h4>
-            </div>
-            <div class="flex flex-wrap gap-2 text-[var(--text-muted)] text-sm mt-4">
-                <span class="skill-tag" style="border-color: rgba(255, 45, 32, 0.3);">Laravel</span>
-                <span class="skill-tag" style="border-color: rgba(119, 123, 180, 0.3);">PHP</span>
-                <span class="skill-tag" style="border-color: rgba(51, 153, 51, 0.3);">Node.js</span>
-                <span class="skill-tag" style="border-color: rgba(0, 0, 0, 0.3);">Express</span>
-                <span class="skill-tag" style="border-color: rgba(0, 117, 143, 0.3);">MySQL</span>
-                <span class="skill-tag" style="border-color: rgba(71, 162, 72, 0.3);">MongoDB</span>
-                <span class="skill-tag" style="border-color: rgba(220, 56, 45, 0.3);">Redis</span>
-                <span class="skill-tag" style="border-color: rgba(255, 102, 0, 0.3);">RabbitMQ</span>
-            </div>
-        </div>
 
-        <!-- Development Tools -->
-        <div class="skill-category-card tools-card">
-            <div class="card-header">
-                <div class="icon-wrapper" style="background: rgba(0, 122, 204, 0.1);">
-                    <i class="fas fa-tools" style="color: #007acc;"></i>
-                </div>
-                <h4 class="text-xl font-bold text-[var(--text)]">Dev Tools</h4>
-            </div>
-            <div class="flex flex-wrap gap-2 text-[var(--text-muted)] text-sm mt-4">
-                <span class="skill-tag" style="border-color: rgba(0, 122, 204, 0.3);">VS Code</span>
-                <span class="skill-tag" style="border-color: rgba(255, 108, 55, 0.3);">Postman</span>
-                <span class="skill-tag" style="border-color: rgba(240, 80, 50, 0.3);">Git</span>
-                <span class="skill-tag" style="border-color: rgba(242, 78, 30, 0.3);">Figma</span>
-                <span class="skill-tag" style="border-color: rgba(0, 82, 204, 0.3);">Jira</span>
-                <span class="skill-tag" style="border-color: rgba(36, 150, 237, 0.3);">Docker</span>
-                <span class="skill-tag" style="border-color: rgba(252, 198, 36, 0.3);">Linux</span>
-                <span class="skill-tag" style="border-color: rgba(0, 217, 255, 0.3);">CI/CD</span>
-            </div>
-        </div>
+                <div class="space-y-6">
+                    <!-- Progress / Skill Bars or Tags -->
+                    <ul class="space-y-3">
+                        <li
+                            class="flex items-center justify-between p-3 rounded-xl bg-[var(--bg-main)] border border-[var(--border)] group/item hover:border-pink-500/30 transition-colors">
+                            <span
+                                class="flex items-center gap-3 font-semibold text-[var(--text-muted)] group-hover/item:text-[var(--text)] transition-colors">
+                                <i class="fab fa-react text-blue-400"></i> React.js
+                            </span>
+                            <span
+                                class="text-xs font-bold px-2 py-1 rounded bg-[var(--bg-elevated)] text-[var(--text-muted)]">Adv.</span>
+                        </li>
+                        <li
+                            class="flex items-center justify-between p-3 rounded-xl bg-[var(--bg-main)] border border-[var(--border)] group/item hover:border-pink-500/30 transition-colors">
+                            <span
+                                class="flex items-center gap-3 font-semibold text-[var(--text-muted)] group-hover/item:text-[var(--text)] transition-colors">
+                                <i class="fas fa-stream text-red-500"></i> RxJS & NGRX
+                            </span>
+                        </li>
+                        <li
+                            class="flex items-center justify-between p-3 rounded-xl bg-[var(--bg-main)] border border-[var(--border)] group/item hover:border-pink-500/30 transition-colors">
+                            <span
+                                class="flex items-center gap-3 font-semibold text-[var(--text-muted)] group-hover/item:text-[var(--text)] transition-colors">
+                                <i class="fab fa-css3 text-blue-500"></i> SCSS / Tailwind
+                            </span>
+                        </li>
+                    </ul>
 
-        <!-- APIs & Services -->
-        <div class="skill-category-card api-card">
-            <div class="card-header">
-                <div class="icon-wrapper" style="background: rgba(16, 185, 129, 0.1);">
-                    <i class="fas fa-cloud" style="color: #10b981;"></i>
+                    <!-- Tag Cloud -->
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="mini-tag">Bootstrap</span>
+                        <span class="mini-tag">Material UI</span>
+                        <span class="mini-tag">Figma</span>
+                        <span class="mini-tag">Responsive Design</span>
+                    </div>
                 </div>
-                <h4 class="text-xl font-bold text-[var(--text)]">APIs & Services</h4>
             </div>
-            <div class="flex flex-wrap gap-2 text-[var(--text-muted)] text-sm mt-4">
-                <span class="skill-tag" style="border-color: rgba(16, 185, 129, 0.3);">REST APIs</span>
-                <span class="skill-tag" style="border-color: rgba(225, 0, 152, 0.3);">GraphQL</span>
-                <span class="skill-tag" style="border-color: rgba(214, 58, 255, 0.3);">JWT</span>
-                <span class="skill-tag" style="border-color: rgba(66, 133, 244, 0.3);">OAuth</span>
-                <span class="skill-tag" style="border-color: rgba(0, 217, 255, 0.3);">WebSockets</span>
-                <span class="skill-tag" style="border-color: rgba(255, 202, 40, 0.3);">Firebase</span>
-                <span class="skill-tag" style="border-color: rgba(255, 153, 0, 0.3);">AWS</span>
-                <span class="skill-tag" style="border-color: rgba(0, 85, 113, 0.3);">Elasticsearch</span>
+
+            <!-- Backend & Architecture -->
+            <div class="tech-category-card group">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="p-3 rounded-xl bg-violet-600/10 text-violet-500">
+                        <i class="fas fa-server text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-[var(--text)]">Backend & Arch.</h3>
+                </div>
+
+                <div class="space-y-6">
+                    <ul class="space-y-3">
+                        <li
+                            class="flex items-center justify-between p-3 rounded-xl bg-[var(--bg-main)] border border-[var(--border)] group/item hover:border-violet-500/30 transition-colors">
+                            <span
+                                class="flex items-center gap-3 font-semibold text-[var(--text-muted)] group-hover/item:text-[var(--text)] transition-colors">
+                                <i class="fab fa-node-js text-green-500"></i> Node.js & Express
+                            </span>
+                            <span
+                                class="text-xs font-bold px-2 py-1 rounded bg-[var(--bg-elevated)] text-[var(--text-muted)]">Mid</span>
+                        </li>
+                        <li
+                            class="flex items-center justify-between p-3 rounded-xl bg-[var(--bg-main)] border border-[var(--border)] group/item hover:border-violet-500/30 transition-colors">
+                            <span
+                                class="flex items-center gap-3 font-semibold text-[var(--text-muted)] group-hover/item:text-[var(--text)] transition-colors">
+                                <i class="fas fa-database text-blue-400"></i> MySQL & MongoDB
+                            </span>
+                        </li>
+                        <li
+                            class="flex items-center justify-between p-3 rounded-xl bg-[var(--bg-main)] border border-[var(--border)] group/item hover:border-violet-500/30 transition-colors">
+                            <span
+                                class="flex items-center gap-3 font-semibold text-[var(--text-muted)] group-hover/item:text-[var(--text)] transition-colors">
+                                <i class="fas fa-terminal text-orange-500"></i> Redis & RabbitMQ
+                            </span>
+                        </li>
+                    </ul>
+
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="mini-tag">REST APIs</span>
+                        <span class="mini-tag">GraphQL</span>
+                        <span class="mini-tag">Microservices</span>
+                        <span class="mini-tag">JWT Auth</span>
+                    </div>
+                </div>
             </div>
+
+            <!-- DevOps & Tools -->
+            <div class="tech-category-card group md:col-span-2 lg:col-span-1">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="p-3 rounded-xl bg-[var(--accent)]/10 text-[var(--accent)]">
+                        <i class="fas fa-tools text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-[var(--text)]">DevTools</h3>
+                </div>
+
+                <div class="space-y-6">
+                    <ul class="space-y-3">
+                        <li
+                            class="flex items-center justify-between p-3 rounded-xl bg-[var(--bg-main)] border border-[var(--border)] group/item hover:border-[var(--accent)]/30 transition-colors">
+                            <span
+                                class="flex items-center gap-3 font-semibold text-[var(--text-muted)] group-hover/item:text-[var(--text)] transition-colors">
+                                <i class="fab fa-docker text-blue-500"></i> Docker
+                            </span>
+                        </li>
+                        <li
+                            class="flex items-center justify-between p-3 rounded-xl bg-[var(--bg-main)] border border-[var(--border)] group/item hover:border-[var(--accent)]/30 transition-colors">
+                            <span
+                                class="flex items-center gap-3 font-semibold text-[var(--text-muted)] group-hover/item:text-[var(--text)] transition-colors">
+                                <i class="fab fa-git-alt text-red-500"></i> Git & GitHub
+                            </span>
+                        </li>
+                        <li
+                            class="flex items-center justify-between p-3 rounded-xl bg-[var(--bg-main)] border border-[var(--border)] group/item hover:border-[var(--accent)]/30 transition-colors">
+                            <span
+                                class="flex items-center gap-3 font-semibold text-[var(--text-muted)] group-hover/item:text-[var(--text)] transition-colors">
+                                <i class="fas fa-cloud text-yellow-500"></i> Firebase
+                            </span>
+                        </li>
+                    </ul>
+
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="mini-tag">Postman</span>
+                        <span class="mini-tag">Jira</span>
+                        <span class="mini-tag">VS Code</span>
+                        <span class="mini-tag">Linux</span>
+                        <span class="mini-tag">CI/CD</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>

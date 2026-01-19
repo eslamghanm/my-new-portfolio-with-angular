@@ -1,76 +1,65 @@
-/* Local Hero styles: stabilize layout, improve CTA focus and respect reduced-motion */
+/* Local Hero styles */
 :host .hero {
-  /* make hero slightly shorter on small screens to avoid excessive empty space */
-  min-height: 75vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
 }
 
-@media (min-width: 768px) {
-  :host .hero {
-    min-height: 100vh; /* full screen on larger viewports */
+:host .hero-grid {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/* Custom Animations */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.15;
+    transform: scale(1.1);
   }
 }
 
-:host .hero-grid {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+.animate-pulse-slow {
+  animation: pulse-slow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Accent underline: unobtrusive decorative bar */
-:host .accent-underline {
-  position: relative;
-  text-decoration: none; /* ensure no text underline */
-  display: inline-block;
+/* Glassmorphism helpers */
+.glass-card {
+  background: rgba(var(--bg-elevated-rgb), 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(var(--border-rgb), 0.5);
 }
 
-:host .accent-underline::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -6px;
-  height: 6px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-strong, #16a34a));
-  opacity: 0.22;
-  transform-origin: left center;
-  transform: scaleX(0.98);
-  transition: transform .28s ease, opacity .28s ease;
-  pointer-events: none;
-}
-
-:host .accent-underline:hover::after {
-  transform: scaleX(1.02) translateY(.5px);
-  opacity: 0.42;
-}
-
-/* Make CTA focus states more visible for keyboard users */
-:host .hero-cta a:focus-visible {
-  outline: none;
-  box-shadow: 0 10px 30px rgba(var(--accent-rgb), 0.14);
-  transform: translateY(-1px);
-}
-
-/* Limit hero media height to avoid overflow on very tall viewports */
+/* Smooth Image Transition */
 :host .hero-media img {
-  max-height: 520px;
-  width: 100%;
-  object-fit: cover;
+  will-change: transform, filter;
 }
 
+/* Responsive adjustments */
 @media (max-width: 640px) {
-  :host .hero-media img { max-height: 360px; }
+  :host .hero {
+    min-height: auto;
+    padding-bottom: 4rem;
+  }
+  
+  :host .hero-media {
+    transform: scale(0.9);
+  }
 }
 
-/* Respect reduced motion preferences */
+/* Reduce Motion */
 @media (prefers-reduced-motion: reduce) {
-  :host .hero-media,
-  :host .hero-media img,
-  :host .hero-media .animate-bounce,
-  :host .hero-grid,
-  :host .accent-underline::after {
+  .animate-pulse-slow,
+  .animate-ping,
+  .animate-bounce,
+  .transition-all,
+  .transform {
     animation: none !important;
     transition: none !important;
+    transform: none !important;
   }
 }

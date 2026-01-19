@@ -16,21 +16,20 @@ export class HeroComponent implements OnInit, OnDestroy {
     // Simple rotating text - no complex typing animation
     currentPhraseIndex = signal(0);
     phrases = [
-        'I build scalable, enterprise-grade web applications.',
-        'I transform complex backends into pixel-perfect frontends.',
-        'I solve business problems with elegant, high-performance code.'
+        'Building scalable, enterprise-grade web applications.',
+        'Crafting pixel-perfect, accessible user interfaces.',
+        'Bridging the gap between complex backends and elegant frontends.'
     ];
     displayText = signal('');
     private rotationTimer: any;
 
     // Computed signals for images
     heroImage = computed(() => this.themeService.isDarkMode() ? 'images/final-me.jpg' : 'images/islam.jpg');
-    secondaryImage = computed(() => this.themeService.isDarkMode() ? 'images/islam.jpg' : 'images/final-me.jpg');
 
     ngOnInit() {
         // Set initial text
         this.displayText.set(this.phrases[0]);
-        
+
         if (isPlatformBrowser(this.platformId)) {
             // Start rotating phrases after a delay
             setTimeout(() => {

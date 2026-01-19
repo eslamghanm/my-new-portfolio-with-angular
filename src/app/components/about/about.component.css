@@ -1,9 +1,40 @@
 /* Styles are in global styles.css */
 
 /* About specific tweaks */
-.reveal h2 { line-height: 1; }
+.reveal h2 {
+    line-height: 1;
+}
 
-/* Metric emphasize */
-.grid > div { transition: transform .25s ease, box-shadow .25s ease; }
-.grid > div:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+/* Metric Cards (Premium Glassmorphism) */
+.metric-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
 
+.metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+    border-color: rgba(var(--accent-rgb), 0.3);
+}
+
+.metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.metric-card:hover::before {
+    transform: scaleX(1);
+}
