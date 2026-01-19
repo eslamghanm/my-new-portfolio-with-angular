@@ -46,11 +46,13 @@
                             [class.scale-100]="activeSection() === 'about'"
                             [class.scale-90]="activeSection() !== 'about'"></div>
 
-                        <!-- Hover Background -->
-                        <div class="absolute inset-0 bg-[var(--accent)]/10 transition-all duration-300 origin-center rounded-full opacity-0 group-hover:opacity-100"
+                        <!-- Hover Background: White in Dark Mode, Black/Dark in Light Mode -->
+                        <div class="absolute inset-0 bg-black dark:bg-white transition-all duration-300 origin-center rounded-full opacity-0 group-hover:opacity-100"
                             [class.opacity-0]="activeSection() === 'about'"></div>
 
-                        <span class="relative z-10 transition-colors group-hover:!text-[var(--accent)]">
+                        <!-- Hover Text: White in Light Mode, Black in Dark Mode -->
+                        <span
+                            class="relative z-10 transition-colors group-hover:text-white dark:group-hover:text-black">
                             Profile
                         </span>
                     </a>
@@ -69,10 +71,11 @@
                             [class.scale-90]="activeSection() !== 'skills'"></div>
 
                         <!-- Hover Background -->
-                        <div class="absolute inset-0 bg-[var(--accent)]/10 transition-all duration-300 origin-center rounded-full opacity-0 group-hover:opacity-100"
+                        <div class="absolute inset-0 bg-black dark:bg-white transition-all duration-300 origin-center rounded-full opacity-0 group-hover:opacity-100"
                             [class.opacity-0]="activeSection() === 'skills'"></div>
 
-                        <span class="relative z-10 transition-colors group-hover:!text-[var(--accent)]">
+                        <span
+                            class="relative z-10 transition-colors group-hover:text-white dark:group-hover:text-black">
                             Expertise
                         </span>
                     </a>
@@ -91,10 +94,11 @@
                             [class.scale-90]="activeSection() !== 'projects'"></div>
 
                         <!-- Hover Background -->
-                        <div class="absolute inset-0 bg-[var(--accent)]/10 transition-all duration-300 origin-center rounded-full opacity-0 group-hover:opacity-100"
+                        <div class="absolute inset-0 bg-black dark:bg-white transition-all duration-300 origin-center rounded-full opacity-0 group-hover:opacity-100"
                             [class.opacity-0]="activeSection() === 'projects'"></div>
 
-                        <span class="relative z-10 transition-colors group-hover:!text-[var(--accent)]">
+                        <span
+                            class="relative z-10 transition-colors group-hover:text-white dark:group-hover:text-black">
                             Projects
                         </span>
                     </a>
@@ -113,10 +117,11 @@
                             [class.scale-90]="activeSection() !== 'contact'"></div>
 
                         <!-- Hover Background -->
-                        <div class="absolute inset-0 bg-[var(--accent)]/10 transition-all duration-300 origin-center rounded-full opacity-0 group-hover:opacity-100"
+                        <div class="absolute inset-0 bg-black dark:bg-white transition-all duration-300 origin-center rounded-full opacity-0 group-hover:opacity-100"
                             [class.opacity-0]="activeSection() === 'contact'"></div>
 
-                        <span class="relative z-10 transition-colors group-hover:!text-[var(--accent)]">
+                        <span
+                            class="relative z-10 transition-colors group-hover:text-white dark:group-hover:text-black">
                             Contact
                         </span>
                     </a>
