@@ -53,9 +53,9 @@ html {
   --glow-accent-strong: 0 0 60px rgba(16, 185, 129, 0.3);
 
   /* Layout Variables */
-  --section-py: 10rem;
+  --section-py: 5rem;
   --container-max-width: 1400px;
-  --content-padding: 4rem;
+  --content-padding: 2.5rem;
 }
 
 /* Enhanced Light mode theme */
@@ -88,12 +88,12 @@ html {
   --glass-bg: rgba(255, 255, 255, 0.9);
 
   /* Enhanced Shadows with Emerald Glow */
-  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  --glow-accent: 0 0 40px rgba(5, 150, 105, 0.2);
-  --glow-accent-strong: 0 0 60px rgba(5, 150, 105, 0.3);
+  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  --glow-accent: 0 0 30px rgba(5, 150, 105, 0.15);
+  --glow-accent-strong: 0 0 50px rgba(5, 150, 105, 0.2);
 
   /* Layout Variables */
-  --section-py: 8rem;
+  --section-py: 4rem;
 }
 
 body {
@@ -321,11 +321,12 @@ nav {
 /* Enhanced nav link micro-interactions */
 .nav-link {
   color: var(--text-muted);
+  font-weight: 500;
 }
 
 [data-theme="light"] .nav-link {
-  color: var(--text-secondary);
-  /* Darker slate in light mode */
+  color: #334155;
+  /* Slate-700 for better visibility */
   font-weight: 600;
 }
 
