@@ -26,8 +26,8 @@ export class HeroComponent implements OnInit, OnDestroy {
     // Computed signals for images
     heroImage = computed(() => {
         const isDark = this.themeService.isDarkMode();
-        console.log('Theme changed:', isDark ? 'Dark' : 'Light', 'Image:', isDark ? '/images/eslam.jpg' : '/images/final-me.jpg');
-        return isDark ? '/images/eslam.jpg' : '/images/final-me.jpg';
+        console.log('Theme changed:', isDark ? 'Dark' : 'Light', 'Image:', isDark ? '/images/islam.jpg' : '/images/final-me.jpg');
+        return isDark ? '/images/islam.jpg' : '/images/final-me.jpg';
     });
 
     ngOnInit() {
